@@ -70,14 +70,19 @@
           </q-card-section>
 
           <q-card-section class="q-pt-none text-left">
-            <div v-if="pay_instruction" >
-              <div class="full-width text-center bg-grey-5 q-py-xs q-mb-sm">HOW TO PAY</div>
+            <div class="full-width text-center bg-grey-5 q-py-xs q-mb-sm">HOW TO PAY</div>
+            <div v-if="pay_instruction !== 'undefined'" >
               <ol>
                 <li v-for="(instruction, index) in pay_instruction" :key="index">{{ instruction }}</li>
                 <li>Successfull payment notification will be sent via email at <b>{{ emailAddress }}</b></li>
                 <li><b>{{ pay_seller }}</b> will contact you regarding your transaction</li>
                 <li>If you do not receive successfull payment notification, please contact our Payment Partner's Support Team at <b>support@bux.ph</b></li>
               </ol>
+            </div>
+            <div v-else>
+              <ul>
+                <li>Check your email at <b>{{ emailAddress }}</b> for detailed instructions on how to pay at <b>{{ pay_code }}</b></li>
+              </ul>
             </div>
           </q-card-section>
 
