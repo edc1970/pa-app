@@ -558,7 +558,7 @@ export default {
         }
 
         // first Continue button
-        /* if (firstName.value && middleName.value && lastName.value && 
+        if (firstName.value && middleName.value && lastName.value && 
             presentAddress.value && presentCity.value && presentProvince.value &&
             permanentAddress.value && permanentCity.value && permanentProvince.value &&
             landlinePhone.value && mobilePhone.value &&
@@ -567,7 +567,7 @@ export default {
           disableButton1.value = false
         }else{
           disableButton1.value = true
-        } */
+        }
 
       }
     )
@@ -712,8 +712,8 @@ export default {
             "email": emailAddress.value,
             "contact": mobilePhone.value,
             "name": capitalize(firstName.value) + ' ' + capitalize(middleName.value) + ' ' + capitalize(lastName.value),
-            "notification_url": "https://philsecure-pa.netlify.app/bux_notif",
-            "redirect_url": "https://philsecure-pa.netlify.app/application-done",
+            "notification_url": "https://philsecure-pa.netlify.app/#/bux_notif",
+            "redirect_url": "https://philsecure-pa.netlify.app/#/application-done",
             "param1": "",
             "param2": "",
             //"cust_shoulder": 1
