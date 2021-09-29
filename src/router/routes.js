@@ -21,6 +21,10 @@ const routes = [
         component: () => import('pages/Application-Done.vue')
       },
       { 
+        path: 'file-a-claim',
+        component: () => import('pages/File-Claim.vue')
+      },
+      { 
         path: 'bux_redirect',
         component: () => import('pages/Bux_Redirect.vue')
       },

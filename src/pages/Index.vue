@@ -38,12 +38,6 @@
 import { ref } from 'vue'
 export default {
   name: 'PageIndex',
-
-  setup() {
-  
-    return {
-    }
-  }
 }
 </script>
 

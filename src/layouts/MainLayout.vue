@@ -84,7 +84,7 @@
 
       <template v-for="(menuItem, index) in menuList1" :key="index" v-bind="menuItem">
         <q-list>
-          <q-item clickable v-ripple tag="a" :to="menuItem.link">
+          <q-item clickable v-ripple tag="a" :href="menuItem.link">
             <q-item-section  class="q-pt-xs martel">
               {{ menuItem.label }}
             </q-item-section>
@@ -179,7 +179,7 @@ export default {
       {
         icon: '',
         label: 'How To File A Claim',
-        link: 'file-a-claim',
+        link: '#/file-a-claim',
         separator: true
       },
       {

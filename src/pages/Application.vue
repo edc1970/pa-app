@@ -700,7 +700,7 @@ export default {
         // do something when form is submitted
         console.log('Processing payment...')
         //console.log(pay_code.value)
-        /* bux_api
+        bux_api
           .post('open/checkout/',
           {
             "req_id": uuid,
@@ -712,8 +712,8 @@ export default {
             "email": emailAddress.value,
             "contact": mobilePhone.value,
             "name": capitalize(firstName.value) + ' ' + capitalize(middleName.value) + ' ' + capitalize(lastName.value),
-            "notification_url": "http://uniqualityintl.com/axios/bux_notif",
-            "redirect_url": "http://uniqualityintl.com/axios/bux_redirect",
+            "notification_url": "https://philsecure-pa.netlify.app/bux_notif",
+            "redirect_url": "https://philsecure-pa.netlify.app/application-done",
             "param1": "",
             "param2": "",
             //"cust_shoulder": 1
@@ -729,15 +729,15 @@ export default {
                 }
               )
             /* }else{
-              pay_refcode.value = res.data.ref_code 
+              pay_refcode.value = res.data.ref_code */
             }
           })
- */
+
         // Save personal information and selected plans to database
         console.log('Saving information...')
 
         // Show finished application page
-        window.open('application-done','_self')
+        window.open('#/application-done','_self')
       }
     }
   },
