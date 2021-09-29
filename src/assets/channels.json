@@ -1,0 +1,575 @@
+{
+    "Non Bank OTC": {
+      "7-Eleven": {
+        "code": "711_direct",
+        "gateway": "Direct",
+        "instructions": {
+          "Payment": [
+            "Go to nearest branch",
+            "Present the barcode or reference number",
+            "Pay the specified amount",
+            "The Cashier will process your payment in real-time"
+          ]
+        },
+        "terms": "https://www.cliqq.net/terms/",
+        "extras": {
+          "min": 50.0,
+          "max": 10000.0
+        }
+      },
+      "Bayad Center - Dragonpay": {
+        "code": "BAYD",
+        "gateway": "Dragonpay",
+        "instructions": {
+          "Payment": [
+            "Write Dragonpay as your Biller Name",
+            "Provide Reference number and make sure it is correctly entered in the Account Number field. A wrong account number can cause your transaction to remain unvalidated",
+            "Provide your Full name and make sure your Total amount is correct and the same on this receipt",
+            "Please provide a valid Contact number where we can reach you in case there are problems with the validation"
+          ]
+        },
+        "terms": "https://www.dragonpay.ph/terms-and-conditions",
+        "extras": {
+          "min": 50.0,
+          "max": 80000.0
+        }
+      },
+      "Cebuana - Dragonpay": {
+        "code": "CEBL",
+        "gateway": "Dragonpay",
+        "instructions": {
+          "Payment": [
+            "Write Dragonpay as your Biller Name",
+            "Provide Reference number and make sure it is correctly entered in the Account Number field. A wrong account number can cause your transaction to remain unvalidated",
+            "Provide your Full name and make sure your Total amount is correct and the same on this receipt",
+            "Please provide a valid Contact number where we can reach you in case there are problems with the validation"
+          ]
+        },
+        "terms": "https://www.dragonpay.ph/terms-and-conditions",
+        "extras": {
+          "min": 50.0,
+          "max": 80000.0
+        }
+      },
+      "LBC - Dragonpay": {
+        "code": "LBC",
+        "gateway": "Dragonpay",
+        "instructions": {
+          "Payment": [
+            "Write Dragonpay as your Biller Name",
+            "Provide Reference number and make sure it is correctly entered in the Account Number field. A wrong account number can cause your transaction to remain unvalidated",
+            "Provide your Full name and make sure your Total amount is correct and the same on this receipt",
+            "Please provide a valid Contact number where we can reach you in case there are problems with the validation"
+          ]
+        },
+        "terms": "https://www.dragonpay.ph/terms-and-conditions",
+        "extras": {
+          "min": 50.0,
+          "max": 80000.0
+        }
+      },
+      "Mlhuillier - Dragonpay": {
+        "code": "MLH",
+        "gateway": "Dragonpay",
+        "instructions": {
+          "Payment": [
+            "Write Dragonpay as your Biller Name",
+            "Provide Reference number and make sure it is correctly entered in the Account Number field. A wrong account number can cause your transaction to remain unvalidated",
+            "Provide your Full name and make sure your Total amount is correct and the same on this receipt",
+            "Please provide a valid Contact number where we can reach you in case there are problems with the validation"
+          ]
+        },
+        "terms": "https://www.dragonpay.ph/terms-and-conditions",
+        "extras": {
+          "min": 180.0,
+          "max": 80000.0
+        }
+      },
+      "SM/Supermarket/Savemore - Dragonpay": {
+        "code": "SMR",
+        "gateway": "Dragonpay",
+        "instructions": {
+          "Payment": [
+            "Write Dragonpay as your Biller Name",
+            "Provide Reference number and make sure it is correctly entered in the Account Number field. A wrong account number can cause your transaction to remain unvalidated",
+            "Provide your Full name and make sure your Total amount is correct and the same on this receipt",
+            "Please provide a valid Contact number where we can reach you in case there are problems with the validation"
+          ]
+        },
+        "terms": "https://www.dragonpay.ph/terms-and-conditions",
+        "extras": {
+          "min": 50.0,
+          "max": 80000.0
+        }
+      },
+      "Robinsons Dept Store - Dragonpay": {
+        "code": "RDS",
+        "gateway": "Dragonpay",
+        "instructions": {
+          "Payment": [
+            "Write Dragonpay as your Biller Name",
+            "Provide Reference number and make sure it is correctly entered in the Account Number field. A wrong account number can cause your transaction to remain unvalidated",
+            "Provide your Full name and make sure your Total amount is correct and the same on this receipt",
+            "Please provide a valid Contact number where we can reach you in case there are problems with the validation"
+          ]
+        },
+        "terms": "https://www.dragonpay.ph/terms-and-conditions",
+        "extras": {
+          "min": 50.0,
+          "max": 80000.0
+        }
+      },
+      "ECPay - Dragonpay": {
+        "code": "ECPY",
+        "gateway": "Dragonpay",
+        "instructions": {
+          "Payment": [
+            "Write Dragonpay as your Biller Name",
+            "Provide Reference number and make sure it is correctly entered in the Account Number field. A wrong account number can cause your transaction to remain unvalidated",
+            "Provide your Full name and make sure your Total amount is correct and the same on this receipt",
+            "Please provide a valid Contact number where we can reach you in case there are problems with the validation"
+          ]
+        },
+        "terms": "https://www.dragonpay.ph/terms-and-conditions",
+        "extras": {
+          "min": 50.0,
+          "max": 80000.0
+        }
+      },
+      "Palawan - Dragonpay": {
+        "code": "PLWN",
+        "gateway": "Dragonpay",
+        "instructions": {
+          "Payment": [
+            "Write Dragonpay as your Biller Name",
+            "Provide Reference number and make sure it is correctly entered in the Account Number field. A wrong account number can cause your transaction to remain unvalidated",
+            "Provide your Full name and make sure your Total amount is correct and the same on this receipt",
+            "Please provide a valid Contact number where we can reach you in case there are problems with the validation"
+          ]
+        },
+        "terms": "https://www.dragonpay.ph/terms-and-conditions",
+        "extras": {
+          "min": 50.0,
+          "max": 20000.0
+        }
+      },
+      "RD Pawnshop - Dragonpay": {
+        "code": "RDP",
+        "gateway": "Dragonpay",
+        "instructions": {
+          "Payment": [
+            "Write Dragonpay as your Biller Name",
+            "Provide Reference number and make sure it is correctly entered in the Account Number field. A wrong account number can cause your transaction to remain unvalidated",
+            "Provide your Full name and make sure your Total amount is correct and the same on this receipt",
+            "Please provide a valid Contact number where we can reach you in case there are problems with the validation"
+          ]
+        },
+        "terms": "https://www.dragonpay.ph/terms-and-conditions",
+        "extras": {
+          "min": 50.0,
+          "max": 20000.0
+        }
+      },
+      "RuralNet - Dragonpay": {
+        "code": "RLNT",
+        "gateway": "Dragonpay",
+        "instructions": {
+          "Payment": [
+            "Write Dragonpay as your Biller Name",
+            "Provide Reference number and make sure it is correctly entered in the Account Number field. A wrong account number can cause your transaction to remain unvalidated",
+            "Provide your Full name and make sure your Total amount is correct and the same on this receipt",
+            "Please provide a valid Contact number where we can reach you in case there are problems with the validation"
+          ]
+        },
+        "terms": "https://www.dragonpay.ph/terms-and-conditions",
+        "extras": {
+          "min": 50.0,
+          "max": 80000.0
+        }
+      },
+      "Posible": {
+        "code": "posible",
+        "gateway": "Direct",
+        "instructions": {
+          "Payment": [
+            "Write Bux as your Biller Name",
+            "Provide Reference number and make sure it is correctly entered in the Account Number field. A wrong account number can cause your transaction to remain unvalidated",
+            "Provide your Full name and make sure your Total amount is correct and the same on this receipt",
+            "Please provide a valid Contact number where we can reach you in case there are problems with the validation"
+          ]
+        },
+        "terms": "https://www.posible.net/privacy-policy",
+        "extras": {
+          "min": 50.0,
+          "max": 10000.0
+        }
+      },
+      "Partnerpay": {
+        "code": "partnerpay",
+        "gateway": "Direct",
+        "instructions": {},
+        "terms": "",
+        "extras": {
+          "min": 50.0,
+          "max": 80000.0
+        }
+      },
+      "Pay N Go": {
+        "code": "payngo",
+        "gateway": "Direct",
+        "instructions": {
+          "Payment": [
+            "Write Bux as your Biller Name",
+            "Provide Reference number and make sure it is correctly entered in the Account Number field. A wrong account number can cause your transaction to remain unvalidated",
+            "Provide your Full name and make sure your Total amount is correct and the same on this receipt",
+            "Please provide a valid Contact number where we can reach you in case there are problems with the validation"
+          ]
+        },
+        "terms": "https://bux.ph/bti_terms/",
+        "extras": {
+          "min": 50.0,
+          "max": 5000.0
+        }
+      },
+      "DA5": {
+        "code": "da5",
+        "gateway": "Direct",
+        "instructions": {
+          "Payment": [
+            "Write Bux as your Biller Name",
+            "Provide Reference number and make sure it is correctly entered in the Account Number field. A wrong account number can cause your transaction to remain unvalidated",
+            "Provide your Full name and make sure your Total amount is correct and the same on this receipt",
+            "Please provide a valid Contact number where we can reach you in case there are problems with the validation"
+          ]
+        },
+        "terms": "https://bux.ph/da5_terms/",
+        "extras": {
+          "min": 50.0,
+          "max": 10000.0
+        }
+      },
+      "ECPay": {
+        "code": "ecpay",
+        "gateway": "Direct",
+        "instructions": {},
+        "terms": "",
+        "extras": {
+          "min": 50.0,
+          "max": 10000.0
+        }
+      },
+      "USSC - ECPay": {
+        "code": "ussc",
+        "gateway": "ECPay",
+        "instructions": {
+          "Payment": [
+            "Write Bux as your Biller Name",
+            "Provide Reference number and make sure it is correctly entered in the Account Number field. A wrong account number can cause your transaction to remain unvalidated",
+            "Provide your Full name and make sure your Total amount is correct and the same on this receipt",
+            "Please provide a valid Contact number where we can reach you in case there are problems with the validation"
+          ]
+        },
+        "terms": "https://ussc.com.ph/privacy-policy/index.html",
+        "extras": {
+          "min": 10001.0,
+          "max": 20000.0
+        }
+      },
+      "Rustans - ECPay": {
+        "code": "rustan",
+        "gateway": "ECPay",
+        "instructions": {
+          "Payment": [
+            "Write Bux as your Biller Name",
+            "Provide Reference number and make sure it is correctly entered in the Account Number field. A wrong account number can cause your transaction to remain unvalidated",
+            "Provide your Full name and make sure your Total amount is correct and the same on this receipt",
+            "Please provide a valid Contact number where we can reach you in case there are problems with the validation"
+          ]
+        },
+        "terms": "https://themarketplace.com.ph/privacy-policy",
+        "extras": {
+          "min": 10001.0,
+          "max": 20000.0
+        }
+      },
+      "Shopwise - ECPay": {
+        "code": "shopwise",
+        "gateway": "ECPay",
+        "instructions": {
+          "Payment": [
+            "Write Bux as your Biller Name",
+            "Provide Reference number and make sure it is correctly entered in the Account Number field. A wrong account number can cause your transaction to remain unvalidated",
+            "Provide your Full name and make sure your Total amount is correct and the same on this receipt",
+            "Please provide a valid Contact number where we can reach you in case there are problems with the validation"
+          ]
+        },
+        "terms": "https://www.shopwise.com.ph/privacy_policy",
+        "extras": {
+          "min": 10001.0,
+          "max": 20000.0
+        }
+      },
+      "Tambunting - ECPay": {
+        "code": "tmbntng",
+        "gateway": "ECPay",
+        "instructions": {
+          "Payment": [
+            "Write Bux as your Biller Name",
+            "Provide Reference number and make sure it is correctly entered in the Account Number field. A wrong account number can cause your transaction to remain unvalidated",
+            "Provide your Full name and make sure your Total amount is correct and the same on this receipt",
+            "Please provide a valid Contact number where we can reach you in case there are problems with the validation"
+          ]
+        },
+        "terms": "https://tambunting.ph/Main?privacy",
+        "extras": {
+          "min": 10001.0,
+          "max": 20000.0
+        }
+      },
+      "CVM - ECPay": {
+        "code": "cvm",
+        "gateway": "ECPay",
+        "instructions": {
+          "Payment": [
+            "Write Bux as your Biller Name",
+            "Provide Reference number and make sure it is correctly entered in the Account Number field. A wrong account number can cause your transaction to remain unvalidated",
+            "Provide your Full name and make sure your Total amount is correct and the same on this receipt",
+            "Please provide a valid Contact number where we can reach you in case there are problems with the validation"
+          ]
+        },
+        "terms": "http://www.cvmpawnshops.com/privacy-policy/",
+        "extras": {
+          "min": 10001.0,
+          "max": 20000.0
+        }
+      },
+      "Wellcome - ECPay": {
+        "code": "wellcome",
+        "gateway": "ECPay",
+        "instructions": {
+          "Payment": [
+            "Write Bux as your Biller Name",
+            "Provide Reference number and make sure it is correctly entered in the Account Number field. A wrong account number can cause your transaction to remain unvalidated",
+            "Provide your Full name and make sure your Total amount is correct and the same on this receipt",
+            "Please provide a valid Contact number where we can reach you in case there are problems with the validation"
+          ]
+        },
+        "terms": "https://wellcome.org/about-us/governance/privacy-and-terms",
+        "extras": {
+          "min": 10001.0,
+          "max": 20000.0
+        }
+      },
+      "Expresspay - Dragonpay": {
+        "code": "EXPY",
+        "gateway": "Dragonpay",
+        "instructions": {
+          "Payment": [
+            "Write Dragonpay as your Biller Name",
+            "Provide Reference number and make sure it is correctly entered in the Account Number field. A wrong account number can cause your transaction to remain unvalidated",
+            "Provide your Full name and make sure your Total amount is correct and the same on this receipt",
+            "Please provide a valid Contact number where we can reach you in case there are problems with the validation"
+          ]
+        },
+        "terms": "https://www.dragonpay.ph/terms-and-conditions",
+        "extras": {
+          "min": 50.0,
+          "max": 80000.0
+        }
+      },
+      "Bayad Center - Bayad Center": {
+        "code": "bayad_center",
+        "gateway": "Bayad Center",
+        "instructions": {},
+        "terms": "",
+        "extras": {
+          "min": 10001.0,
+          "max": 20000.0
+        }
+      },
+      "RuralNet Bank and Coops - Bayad Center": {
+        "code": "bc_rlnt",
+        "gateway": "Bayad Center",
+        "instructions": {},
+        "terms": "",
+        "extras": {
+          "min": 10001.0,
+          "max": 20000.0
+        }
+      },
+      "USSC - Bayad Center": {
+        "code": "bc_ussc",
+        "gateway": "Bayad Center",
+        "instructions": {},
+        "terms": "",
+        "extras": {
+          "min": 10001.0,
+          "max": 20000.0
+        }
+      },
+      "Petnet, Inc. - Bayad Center": {
+        "code": "petnet",
+        "gateway": "Bayad Center",
+        "instructions": {},
+        "terms": "",
+        "extras": {
+          "min": 10001.0,
+          "max": 20000.0
+        }
+      },
+      "Villarica - Bayad Center": {
+        "code": "villarica",
+        "gateway": "Bayad Center",
+        "instructions": {},
+        "terms": "",
+        "extras": {
+          "min": 10001.0,
+          "max": 20000.0
+        }
+      },
+      "RD Pawnshop - ECPay": {
+        "code": "ecpay_rdp",
+        "gateway": "ECPay",
+        "instructions": {},
+        "terms": "",
+        "extras": {
+          "min": 50.0,
+          "max": 10000.0
+        }
+      },
+      "RuralNet - ECPay": {
+        "code": "ecpay_rlnt",
+        "gateway": "ECPay",
+        "instructions": {},
+        "terms": "",
+        "extras": {
+          "min": 50.0,
+          "max": 10000.0
+        }
+      },
+      "i2i": {
+        "code": "i2i",
+        "gateway": "Direct",
+        "instructions": {},
+        "terms": "",
+        "extras": {
+          "min": 50.0,
+          "max": 80000.0
+        }
+      }
+    },
+    "Banking": {
+      "BPI - Dragonpay": {
+        "code": "BPIA",
+        "gateway": "Dragonpay",
+        "instructions": {
+          "Payment": [
+            "You will be redirected to the chosen bank's webpage",
+            "Login to your Online Banking Account,You will receive a One-Time PIN (OTP) to your registered mobile number",
+            "Authorize the payment"
+          ]
+        },
+        "terms": "https://www.dragonpay.ph/terms-and-conditions",
+        "extras": {
+          "min": 50.0,
+          "max": 49000.0
+        }
+      },
+      "UBP - Dragonpay": {
+        "code": "UBPB",
+        "gateway": "Dragonpay",
+        "instructions": {
+          "Payment": [
+            "You will be redirected to the chosen bank's webpage",
+            "Login to your Online Banking Account,You will receive a One-Time PIN (OTP) to your registered mobile number",
+            "Authorize the payment"
+          ]
+        },
+        "terms": "https://www.dragonpay.ph/terms-and-conditions",
+        "extras": {
+          "min": 50.0,
+          "max": 80000.0
+        }
+      },
+      "RCBC - Dragonpay": {
+        "code": "RCBC",
+        "gateway": "Dragonpay",
+        "instructions": {
+          "Payment": [
+            "You will be redirected to the chosen bank's webpage",
+            "Login to your Online Banking Account,You will receive a One-Time PIN (OTP) to your registered mobile number",
+            "Authorize the payment"
+          ]
+        },
+        "terms": "https://www.dragonpay.ph/terms-and-conditions",
+        "extras": {
+          "min": 50.0,
+          "max": 80000.0
+        }
+      }
+    },
+    "EWallet": {
+      "GCash": {
+        "code": "gcash",
+        "gateway": "Direct",
+        "instructions": {
+          "Payment": [
+            "You will be redirected to the chosen bank's webpage",
+            "Login to your GCash Account,You will receive a One-Time PIN (OTP) to your registered mobile number",
+            "Authorize the payment"
+          ]
+        },
+        "terms": "https://www.gcash.com/app/v1.0.0/terms-and-conditions",
+        "extras": {
+          "min": 50.0,
+          "max": 80000.0
+        }
+      },
+      "Grabpay": {
+        "code": "grabpay",
+        "gateway": "Direct",
+        "instructions": {
+          "Payment": [
+            "You will be redirected to the chosen bank's webpage",
+            "Login to your GrabPay Account,You will receive a One-Time PIN (OTP) to your registered mobile number",
+            "Authorize the payment"
+          ]
+        },
+        "terms": "https://grab.com/ph/terms-policies/payment-rewards/",
+        "extras": {
+          "min": 50.0,
+          "max": 80000.0
+        }
+      }
+    },
+    "Card Payments": {
+      "Card Payments - Xendit": {
+        "code": "visamc",
+        "gateway": "Xendit",
+        "instructions": {
+          "Payment": [
+            "You will be redirected to the Xendit webpage",
+            "You will be prompted to enter your Card DetailsYou will receive a One-Time PIN (OTP) to your registered mobile number",
+            "Authorize the payment"
+          ]
+        },
+        "terms": "https://www.xendit.co/en/terms-and-conditions/",
+        "extras": {
+          "min": 50.0,
+          "max": 0.0
+        }
+      }
+    },
+    "BNPL": {
+      "Billease": {
+        "code": "billease",
+        "gateway": "Direct",
+        "instructions": {},
+        "terms": "",
+        "extras": {
+          "min": 500.0,
+          "max": 50000.0
+        }
+      }
+    }
+  }

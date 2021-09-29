@@ -1,0 +1,54 @@
+// app global css in SCSS form
+@font-face {
+  font-family: Quattrocento-Bold;
+  src: url(assets/fonts/quattrocento/Quattrocento-Bold.ttf);
+}
+
+@font-face {
+  font-family: Quattrocento-Regular;
+  src: url(assets/fonts/quattrocento/Quattrocento-Regular.ttf);
+}
+
+@font-face {
+  font-family: MartelSans-Regular;
+  src: url(assets/fonts/martel/MartelSans-Regular.ttf);
+}
+  
+// declare a class which applies it
+.quattro, .quattro-bold {
+  letter-spacing: 0px;
+  line-height: 1.2;
+}
+.quattro {
+  font-family: 'Quattrocento-Regular';
+}
+
+.quattro-bold {
+  font-family: 'Quattrocento-Bold';
+}
+
+.martel {
+  font-family: 'MartelSans-Regular';
+  padding-top: 2px;
+}
+
+.martel > span.q-btn__content {
+  padding-top: 5px;
+}
+
+.martel > span.q-btn__content > i.q-icon {
+  margin-top: -2px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.q-field__bottom {
+  background-color: #eee;
+}
+
+table.q-table tbody tr:last-child, table.q-table tbody tr:last-child td:last-child {
+  font-weight: 600;
+  font-size: larger;
+}
