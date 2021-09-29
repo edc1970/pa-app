@@ -24,3 +24,5 @@ quasar build
 
 ### Customize the configuration
 See [Configuring quasar.conf.js](https://v2.quasar.dev/quasar-cli/quasar-conf-js).
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/21e46686-7983-4893-b98b-943e51f29605/deploy-status)](https://app.netlify.com/sites/philsecure-pa/deploys)
