@@ -741,10 +741,7 @@ export default {
       }
     }
   },
-  props: [
-    firstName.value,
-    emailAddress.value
-  ]
+  
 }
 </script>
 
