@@ -47,7 +47,7 @@
         >
           <div class="row text-h6">
             <div class="col-12">
-              <p class="martel text-subtitle2 text-bold text-capitalize">A. Please Fill-Up The Application Form</p>
+              <p class="martel text-subtitle2 text-bold text-toUpperCase">A. Please Fill-Up The Application Form</p>
             </div>
           </div>
 
@@ -325,25 +325,19 @@
                 </q-item>
               </q-list>
 
-              <div>
-                <p class="text-h6">Instructions:</p>
-                <ol>
-                  <li>Please review the amounts stated above. Click <b>'Back'</b> to change Plans or Addons.</li>
-                  <li>Click <b>'Proceed to Payment'</b> to checkout.</li>
-                  <li>When you checkout, you will be redirected to Philsecure's payment partner.</li>
-                </ol>
-              </div>
-
-              <!-- <q-select outlined stack-label options-dense v-model="channel" :options="channelOptions" label="Payment Method" @update:model-value="getOutletOptions(channel)" :rules="[val => !!val || 'Field is required']" class="bg-grey-1 text-uppercase"/>
+              <q-select outlined stack-label options-dense v-model="channel" :options="channelOptions" label="Payment Method" @update:model-value="getOutletOptions(channel)" :rules="[val => !!val || 'Field is required']" class="bg-grey-1 text-uppercase"/>
               <q-select outlined stack-label options-dense v-model="outlet" :options="outletOptions" label="Payment Outlets" @update:model-value="getOutletDetails(channel,outlet)" :rules="[val => !!val || 'Field is required']" class="bg-grey-1 text-uppercase"/>
 
               <div>
-                <p v-if="pay_instructions" class="text-body text-bold">Instructions:</p>
-                <ul v-for="instruction in pay_instructions" :key="instruction">
-                  <li>{{ instruction }}</li>
-                </ul>
-                <p v-if="pay_refcode" class="text-h6">Reference Number: <span class="text-bold">{{pay_refcode}}</span></p>
-              </div> -->
+                <p class="text-h6">Instructions:</p>
+                <ol style="line-height: 1.6">
+                  <li>Please review the amounts stated above. Click <b>"Back"</b> to change Plans or Addons.</li>
+                  <li>Select your preferred payment channel.</li>
+                  <li>Selecting <b>"Banking"</b>, <b>"EWallet"</b>, or <b>"Card Payments"</b> will redirect you to the payment channel's webpage. Follow further instructions.</li>
+                  <li>Selecting <b>"Non Bank OTC"</b> or <b>"BNPL"</b> will generate a Reference Number. You will then receive an email containing instructions how to proceed.</li>
+                  <li>Click <b>"Proceed to Payment"</b> to checkout.</li>
+                </ol>
+              </div>
             </div>
           </div>
 
@@ -387,6 +381,33 @@ export default {
     const done1 = ref(false)
     const done2 = ref(false)
     const done3 = ref(false)
+
+    // Clear Local Storage of any previously saved data
+    $q.localStorage.set('uuid','')
+    $q.localStorage.set('firstName','')
+    $q.localStorage.set('middleName','')
+    $q.localStorage.set('lastName','')
+    $q.localStorage.set('presentAddress','')
+    $q.localStorage.set('presentCity','')
+    $q.localStorage.set('presentProvince','')
+    $q.localStorage.set('permanentAddress','')
+    $q.localStorage.set('permanentCity','')
+    $q.localStorage.set('permanentProvince','')
+    $q.localStorage.set('landlinePhone','')
+    $q.localStorage.set('mobilePhone','')
+    $q.localStorage.set('emailAddress','')
+    $q.localStorage.set('sex','')
+    $q.localStorage.set('birthDate','')
+    $q.localStorage.set('pay_checkouturl','')
+    $q.localStorage.set('pay_refcode','')
+    $q.localStorage.set('pay_code','')
+    $q.localStorage.set('pay_seller','')
+    $q.localStorage.set('pay_imageurl','')
+    $q.localStorage.set('pay_created','')
+    $q.localStorage.set('pay_expiry','')
+    $q.localStorage.set('pay_amount','')
+    $q.localStorage.set('pay_description','')
+    $q.localStorage.set('pay_instruction','')
 
     // form data
     let firstName = ref(null)
@@ -504,17 +525,18 @@ export default {
       },
     ])
 
-    //let channel = ref(null)
-    //let outlet = ref(null)
-    //let channelData = ref(null)
-    //let channelOptions = ref(null)
-    //let outletOptions = ref(null)
-    //let pay_code = ref(null)
-    //let pay_instructions = ref(null)
-    //let pay_refcode = ref(null)
+    let channel = ref(null)
+    let outlet = ref(null)
+    let channelData = ref(null)
+    let channelOptions = ref(null)
+    let outletOptions = ref(null)
+    let pay_code = ref(null)
+    let pay_instructions = ref(null)
+    let pay_refcode = ref(null)
+    let pay_checkout_url = ref(null)
 
     /* load payment channels from Bux.Ph */
-    /* api
+    bux_api
       .get('channel_codes?client_id=00000178f8')
       .then(res => {
         channelData.value = res.data
@@ -530,7 +552,7 @@ export default {
             push: true
           }
         })
-      }) */
+      })
 
     let totalToPay = computed(() => {
       let total = planOptions[plan.value-1].total
@@ -570,10 +592,26 @@ export default {
         if (firstName.value && middleName.value && lastName.value && 
             presentAddress.value && presentCity.value && presentProvince.value &&
             permanentAddress.value && permanentCity.value && permanentProvince.value &&
-            mobilePhone.value && sex.value && birthDate.value)
+            mobilePhone.value && emailAddress.value && sex.value && birthDate.value)
         {
           disableButton1.value = false
+
+          // Store applicant data to Local Storage 
+          $q.localStorage.set('uuid',uuid)
+          $q.localStorage.set('firstName',toUpperCase(firstName.value))
+          $q.localStorage.set('middleName',toUpperCase(middleName.value))
+          $q.localStorage.set('lastName',toUpperCase(lastName.value))
+          $q.localStorage.set('presentAddress',toUpperCase(presentAddress.value))
+          $q.localStorage.set('presentCity',toUpperCase(presentCity.value))
+          $q.localStorage.set('presentProvince',toUpperCase(presentProvince.value))
+          $q.localStorage.set('permanentAddress',toUpperCase(permanentAddress.value))
+          $q.localStorage.set('permanentCity',toUpperCase(permanentCity.value))
+          $q.localStorage.set('permanentProvince',toUpperCase(permanentProvince.value))
+          $q.localStorage.set('landlinePhone',landlinePhone.value)
+          $q.localStorage.set('mobilePhone',mobilePhone.value)
           $q.localStorage.set('emailAddress',emailAddress.value)
+          $q.localStorage.set('sex',sex.value)
+          $q.localStorage.set('birthDate',birthDate.value)
         }else{
           disableButton1.value = true
         }
@@ -585,22 +623,19 @@ export default {
       window.scrollTo(0,0);
     }
 
-    function capitalize(str) {
+    function toUpperCase(str) {
       if(typeof str === 'string') {
-          return str.replace(/^\w/, c => c.toUpperCase());
+          return str.toUpperCase();
       } else {
           return '';
       }
     };
 
-    /* function getOutletDetails(channel,outlet){
+    function getOutletDetails(channel,outlet){
       pay_code.value = channelData.value[channel][outlet]['code']
-      pay_instructions.value = channelData.value[channel][outlet]['instructions']['Payment']
-      console.log(pay_code.value)
-      console.log(pay_instructions.value)
-    } */
+    }
 
-    /* function getOutletOptions(channel){
+    function getOutletOptions(channel){
       if (channel){
         outletOptions.value = Object.keys(channelData.value[channel]).sort()
         outlet.value = null
@@ -608,7 +643,7 @@ export default {
       }else{
         return null
       }   
-    } */
+    }
 
     function showAddonDetail(addonNumber) {
       const state = document.getElementById(addonNumber).style.display;
@@ -686,20 +721,21 @@ export default {
       addon2,
       addon3,
       addonNumber,
-      /* channel,
+      channel,
       channelOptions,
       channelData,
       outlet,
       outletOptions,
       pay_code,
       pay_instructions,
-      pay_refcode, */
+      pay_refcode,
+      pay_checkout_url,
       totalToPay,
 
       scrollTop,
-      capitalize,
-      //getOutletOptions,
-      //getOutletDetails,
+      toUpperCase,
+      getOutletOptions,
+      getOutletDetails,
       showAddonDetail,
       calculateAge,
 
@@ -715,44 +751,73 @@ export default {
         console.log('Processing payment...')
         //console.log(pay_code.value)
         bux_api
-          .post('open/checkout/',
+          .post('generate_code',
           {
-            "req_id": uuid,
+            "req_id": $q.localStorage.getItem('uuid'),
             "client_id": "00000178f8",
-            //"channel": pay_code.value,
+            "channel": pay_code.value,
             "amount": totalToPay.value,
             "description": "PA-" + planOptions[plan.value-1].name,
-            "expiry": 6,
-            "email": emailAddress.value,
-            "contact": mobilePhone.value,
-            "name": capitalize(firstName.value) + ' ' + capitalize(middleName.value) + ' ' + capitalize(lastName.value),
+            "expiry": 24,
+            "email": $q.localStorage.getItem('emailAddress'),
+            "contact": $q.localStorage.getItem('mobilePhone'),
+            "name": $q.localStorage.getItem('firstName') + ' ' + $q.localStorage.getItem('middleName') + ' ' + $q.localStorage.getItem('lastName'),
             "notification_url": "https://philsecure-pa.netlify.app/#/bux_notif",
             "redirect_url": "https://philsecure-pa.netlify.app/#/application-done",
             "param1": "",
             "param2": "",
-            //"cust_shoulder": 1
+            "cust_shoulder": 0
           })
           .then(res => {
             //console.log(res.data)
-            if (res.data.checkout_url){
-              openURL(res.data.checkout_url,null,
+            if (res.data.payment_url){
+              pay_checkout_url.value = res.data.payment_url
+              pay_refcode.value = res.data.ref_code
+
+              openURL(pay_checkout_url.value,null,
                 {
                   menubar: false, 
                   toolbar: false,
                   noreferrer: false
                 }
               )
-            /* }else{
-              pay_refcode.value = res.data.ref_code */
+            }else{
+              pay_checkout_url.value = ''
+              pay_refcode.value = res.data.ref_code
             }
+            //console.log(channelData.value, channel.value, outlet.value)
+            //console.log(channelData.value[channel.value][outlet.value]['instructions'].Payment)
+
+            $q.localStorage.set('pay_code',channel.value + " | " + outlet.value)
+            $q.localStorage.set('pay_checkouturl',pay_checkout_url.value)
+            $q.localStorage.set('pay_refcode',pay_refcode.value)
+            $q.localStorage.set('pay_seller',res.data.seller_name)
+            $q.localStorage.set('pay_imageurl',res.data.image_url)
+            $q.localStorage.set('pay_created',res.data.created)
+            $q.localStorage.set('pay_expiry',res.data.expiry)
+            $q.localStorage.set('pay_amount',totalToPay.value)
+            $q.localStorage.set('pay_description',"PA-" + planOptions[plan.value-1].name)
+            $q.localStorage.set('pay_instruction',channelData.value[channel.value][outlet.value]['instructions'].Payment)
+            
+
+            // Save personal information and selected plans to database
+            console.log('Saving information...')
+
+            console.log('Application done.')
+            // Show finished application page
+            window.open('#/application-done','_self')
           })
-
-        // Save personal information and selected plans to database
-        console.log('Saving information...')
-
-        console.log('Application done.')
-        // Show finished application page
-        window.open('#/application-done','_self')
+          .catch(error => {
+            //console.log(error.status)
+            $q.dialog({
+              title: 'Alert',
+              html: true,
+              message: '<p>An error occurred while trying to access the selected Payment Channels API. Please try again in a few minutes to check if the situation has been resolved or select a different Payment Channel.</p><p style="font-weight:bold;">'+error+'</p>',
+              ok: {
+                push: true
+              }
+            })
+          })
       }
     }
   },
