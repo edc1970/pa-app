@@ -2,7 +2,7 @@ import { boot } from 'quasar/wrappers'
 import axios from 'axios'
 
 const bux_api = axios.create({ 
-  baseURL: 'https://api.bux.ph/v1/api/',
+  baseURL: 'https://api.bux.ph/v1/api/sandbox/',
   headers: {
     'x-api-key':'7c2c0424662daa7eccdb71f76b7b99ca'
   }
