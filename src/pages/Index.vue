@@ -7,7 +7,7 @@
     >
       <div class="full-width gt-xs">
         <q-img 
-          loading
+          loading="eager"
           alt="Medical image background"
           fit="cover"
           spinner-color="white"

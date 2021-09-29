@@ -12,7 +12,16 @@
             color="accent"
             size="large"
             icon="mdi-exit-run"
-            to="/" />
+            to="/">
+
+            <q-tooltip
+              anchor="center left"
+              self="center right"
+              class="bg-white text-grey-10 shadow-2 text-bold"
+              :offset="[6, 10]">
+              Cancel my application
+            </q-tooltip>
+          </q-btn>
       </div>
     </div>
 
@@ -103,7 +112,7 @@
           </div>
 
           <q-stepper-navigation class="row justify-end content-end">
-          <q-btn :disable="disableButton1" @click="() => { done1 = true; step = 2 }" color="primary" label="Continue" class="martel"/>
+          <q-btn :disable="disableButton1" @click="() => { scrollTop(); done1 = true; step = 2; }" color="primary" label="Continue" class="martel"/>
           </q-stepper-navigation>
         </q-step>
 
@@ -254,7 +263,7 @@
 
           <q-stepper-navigation class="row justify-end content-end">
           <q-btn flat @click="step = 1" color="primary" label="Back" class="martel q-mr-sm" />
-          <q-btn :disable="disableButton2" @click="() => { done2 = true; step = 3 }" color="primary" label="Continue" class="martel"/>
+          <q-btn :disable="disableButton2" @click="() => { scrollTop(); done2 = true; step = 3 }" color="primary" label="Continue" class="martel"/>
           </q-stepper-navigation>
         </q-step>
 
@@ -561,16 +570,20 @@ export default {
         if (firstName.value && middleName.value && lastName.value && 
             presentAddress.value && presentCity.value && presentProvince.value &&
             permanentAddress.value && permanentCity.value && permanentProvince.value &&
-            landlinePhone.value && mobilePhone.value &&
-            sex.value && birthDate.value)
+            mobilePhone.value && sex.value && birthDate.value)
         {
           disableButton1.value = false
+          $q.localStorage.set('emailAddress',emailAddress.value)
         }else{
           disableButton1.value = true
         }
 
       }
     )
+
+    function scrollTop() {
+      window.scrollTo(0,0);
+    }
 
     function capitalize(str) {
       if(typeof str === 'string') {
@@ -624,14 +637,14 @@ export default {
     function calculateAge() {
       if (birthDate.value){
         let birthDateYear = new Date(birthDate.value)
-        console.log(birthDateYear.getFullYear(),1956)
+        //console.log(birthDateYear.getFullYear(),1956)
 
         if (parseInt(birthDateYear.getFullYear()) >= 1956) {
           let age = new Date() - new Date(birthDate.value)
           
           age = Math.floor(age/(1000*60*60*24*365.25))
           
-          console.log(age)
+          //console.log(age)
           if (age < 18 || age > 65) {
             showAgeDialog()
           }
@@ -683,6 +696,7 @@ export default {
       pay_refcode, */
       totalToPay,
 
+      scrollTop,
       capitalize,
       //getOutletOptions,
       //getOutletDetails,
@@ -719,7 +733,7 @@ export default {
             //"cust_shoulder": 1
           })
           .then(res => {
-            console.log(res.data)
+            //console.log(res.data)
             if (res.data.checkout_url){
               openURL(res.data.checkout_url,null,
                 {
@@ -736,6 +750,7 @@ export default {
         // Save personal information and selected plans to database
         console.log('Saving information...')
 
+        console.log('Application done.')
         // Show finished application page
         window.open('#/application-done','_self')
       }
