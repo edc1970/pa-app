@@ -54,6 +54,6 @@ app.post('/generate_code', (request, response) => {
   })
 })
 
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
   console.log(`PA Backend app listening at http://localhost:${port}`)
 })
