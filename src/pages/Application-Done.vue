@@ -116,33 +116,6 @@ export default {
     const pay_description = $q.localStorage.getItem('pay_description')
     const pay_instruction = $q.localStorage.getItem('pay_instruction')
 
-    // Clear Local Storage of any previously saved data
-    /* $q.localStorage.set('uuid','')
-    $q.localStorage.set('firstName','')
-    $q.localStorage.set('middleName','')
-    $q.localStorage.set('lastName','')
-    $q.localStorage.set('presentAddress','')
-    $q.localStorage.set('presentCity','')
-    $q.localStorage.set('presentProvince','')
-    $q.localStorage.set('permanentAddress','')
-    $q.localStorage.set('permanentCity','')
-    $q.localStorage.set('permanentProvince','')
-    $q.localStorage.set('landlinePhone','')
-    $q.localStorage.set('mobilePhone','')
-    $q.localStorage.set('emailAddress','')
-    $q.localStorage.set('sex','')
-    $q.localStorage.set('birthDate','')
-    $q.localStorage.set('pay_checkouturl','')
-    $q.localStorage.set('pay_refcode','')
-    $q.localStorage.set('pay_code','')
-    $q.localStorage.set('pay_seller','')
-    $q.localStorage.set('pay_imageurl','')
-    $q.localStorage.set('pay_created','')
-    $q.localStorage.set('pay_expiry','')
-    $q.localStorage.set('pay_amount','')
-    $q.localStorage.set('pay_description','')
-    $q.localStorage.set('pay_instruction','') */
-
     return {
       emailAddress,
       pay_checkouturl,

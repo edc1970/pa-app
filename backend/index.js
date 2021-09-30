@@ -1,7 +1,6 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-const port = 3000
 
 var qs = require('qs')
 const axios = require('axios')
@@ -55,7 +54,7 @@ app.post('/generate_code', (request, response) => {
 })
 
 //app.listen(process.env.PORT || port)
-const server = app.listen(process.env.PORT || 5000, () => {
+const server = app.listen(process.env.PORT || 3000, () => {
   const port = server.address().port;
   console.log(`Express is working on port ${port}`);
 });
