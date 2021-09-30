@@ -23,12 +23,12 @@ app.get('/channel_codes', (request, response) => {
   let queryString = qs.stringify(query)
   axios(`${apiBaseUrl}/channel_codes?${queryString}`,{
     headers: {
-      'x-api-key': apiKey 
+      'x-api-key': apiKey
     }
   }).then(res => {
     response.send(res.data)
   }).catch(error => {
-    console.log(error.response.data)
+    console.log(error)
   })
 })
 
@@ -50,10 +50,12 @@ app.post('/generate_code', (request, response) => {
     console.log(res.data)
     response.send(res.data)
   }).catch(error => {
-    console.log(error.response.data)
+    console.log(error)
   })
 })
 
-app.listen(process.env.PORT || port, () => {
-  console.log(`PA Backend app listening at http://localhost:${port}`)
-})
+//app.listen(process.env.PORT || port)
+const server = app.listen(process.env.PORT || 5000, () => {
+  const port = server.address().port;
+  console.log(`Express is working on port ${port}`);
+});

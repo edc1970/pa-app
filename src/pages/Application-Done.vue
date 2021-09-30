@@ -117,7 +117,7 @@ export default {
     const pay_instruction = $q.localStorage.getItem('pay_instruction')
 
     // Clear Local Storage of any previously saved data
-    $q.localStorage.set('uuid','')
+    /* $q.localStorage.set('uuid','')
     $q.localStorage.set('firstName','')
     $q.localStorage.set('middleName','')
     $q.localStorage.set('lastName','')
@@ -141,7 +141,7 @@ export default {
     $q.localStorage.set('pay_expiry','')
     $q.localStorage.set('pay_amount','')
     $q.localStorage.set('pay_description','')
-    $q.localStorage.set('pay_instruction','')
+    $q.localStorage.set('pay_instruction','') */
 
     return {
       emailAddress,
