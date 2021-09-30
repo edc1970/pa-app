@@ -1,6 +1,0 @@
-[functions]
-  directory = "backend"
-  
-[build]
-  command = "nodemon index.js"
-  functions = "functions"
