@@ -368,7 +368,7 @@
 <script>
 import { ref, watchEffect, computed } from 'vue'
 import { useQuasar, uid, openURL } from 'quasar'
-import { axios, bux_api } from 'boot/axios'
+import { bux_api } from 'boot/axios'
 //import channelData from '../assets/channels.json'
 
 export default {
@@ -536,14 +536,15 @@ export default {
     let pay_checkout_url = ref(null)
 
     /* load payment channels from Bux.Ph */
+
     bux_api
-      .get('channel_codes?client_id=00000178f8')
+      .get('/channel_codes')
       .then(res => {
         channelData.value = res.data
         channelOptions.value = Object.keys(channelData.value).sort()
       })
       .catch(error => {
-        console.log(error)
+        console.log(error.response)
         $q.dialog({
           title: 'Alert',
           html: true,
@@ -612,18 +613,18 @@ export default {
           $q.localStorage.set('emailAddress',emailAddress.value)
           $q.localStorage.set('sex',sex.value)
           $q.localStorage.set('birthDate',birthDate.value)
-        }else{
+        }else{ 
           disableButton1.value = true
         }
 
       }
     )
 
-    function scrollTop() {
+    const scrollTop = () => {
       window.scrollTo(0,0);
     }
 
-    function toUpperCase(str) {
+    const toUpperCase = (str) => {
       if(typeof str === 'string') {
           return str.toUpperCase();
       } else {
@@ -631,11 +632,11 @@ export default {
       }
     };
 
-    function getOutletDetails(channel,outlet){
+    const getOutletDetails = (channel,outlet) => {
       pay_code.value = channelData.value[channel][outlet]['code']
     }
 
-    function getOutletOptions(channel){
+    const getOutletOptions = (channel) => {
       if (channel){
         outletOptions.value = Object.keys(channelData.value[channel]).sort()
         outlet.value = null
@@ -645,7 +646,7 @@ export default {
       }   
     }
 
-    function showAddonDetail(addonNumber) {
+    const showAddonDetail = (addonNumber) => {
       const state = document.getElementById(addonNumber).style.display;
       
       if (state == 'block') {
@@ -657,7 +658,7 @@ export default {
       }
     }
 
-    function showAgeDialog() {
+    const showAgeDialog = () => {
       $q.dialog({
         title: 'Alert',
         message: `As a matter of policy, age eligibility of the applicant must be 18 years old at the time of enrollment and has not reached the 65th birthday at the inception of the insurance coverage.`,
@@ -669,7 +670,7 @@ export default {
       })
     }
 
-    function calculateAge() {
+    const calculateAge = () => {
       if (birthDate.value){
         let birthDateYear = new Date(birthDate.value)
         //console.log(birthDateYear.getFullYear(),1956)
@@ -751,12 +752,11 @@ export default {
         console.log('Processing payment...')
         //console.log(pay_code.value)
         bux_api
-          .post('generate_code',
+          .post('/generate_code',
           {
             "req_id": $q.localStorage.getItem('uuid'),
-            "client_id": "00000178f8",
             "channel": pay_code.value,
-            "amount": totalToPay.value,
+            "amount": totalToPay.value.toString(),
             "description": "PA-" + planOptions[plan.value-1].name,
             "expiry": 24,
             "email": $q.localStorage.getItem('emailAddress'),
@@ -799,7 +799,6 @@ export default {
             $q.localStorage.set('pay_description',"PA-" + planOptions[plan.value-1].name)
             $q.localStorage.set('pay_instruction',channelData.value[channel.value][outlet.value]['instructions'].Payment)
             
-
             // Save personal information and selected plans to database
             console.log('Saving information...')
 
@@ -808,7 +807,7 @@ export default {
             window.open('#/application-done','_self')
           })
           .catch(error => {
-            //console.log(error.status)
+            //console.log(error)
             $q.dialog({
               title: 'Alert',
               html: true,

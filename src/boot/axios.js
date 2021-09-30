@@ -1,14 +1,11 @@
 import { boot } from 'quasar/wrappers'
 import axios from 'axios'
 
+// Real API URL is set in the backend
 const bux_api = axios.create({ 
-  baseURL: 'https://api.bux.ph/v1/api/sandbox/',
-  headers: {
-    'x-api-key':'7c2c0424662daa7eccdb71f76b7b99ca'
-  }
+  baseURL: 'http://localhost:3000'
 })
 
-// "async" is optional;
 // more info on params: https://v2.quasar.dev/quasar-cli/boot-files
 export default boot(({ app }) => {
   app.config.globalProperties.$axios = axios
