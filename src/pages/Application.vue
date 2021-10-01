@@ -1,27 +1,10 @@
 <template>
   <q-page padding>
     <div class="row q-py-sm">
-      <div class="col-grow col-xs-10 text-left">
+      <div class="full-width text-center">
         <p class="martel text-h4 text-primary title">Personal Accident Insurance
           <!-- <br/><span class="q-ml-md text-subtitle1 text-grey-9">Underwriter: <strong>Philippine British Assurance Company, Inc.</strong></span> -->
         </p>
-      </div>
-      <div class="col-grow col-xs-2 text-right btn-exit">
-          <q-btn
-            round
-            color="accent"
-            size="large"
-            icon="mdi-exit-run"
-            to="/">
-
-            <q-tooltip
-              anchor="center left"
-              self="center right"
-              class="bg-white text-grey-10 shadow-2 text-bold"
-              :offset="[6, 10]">
-              Cancel my application
-            </q-tooltip>
-          </q-btn>
       </div>
     </div>
 
@@ -53,25 +36,25 @@
 
           <div class="row text-h6">
             <div class="col-12 col-md-4">
-              <q-input autofocus clearable outlined stack-label v-model="firstName" label="First Name" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase validation-bg"/>
+              <q-input autofocus clearable outlined stack-label v-model="firstName" @blur="(saveData('firstName'))" label="First Name" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase validation-bg"/>
             </div>
             <div class="col-12 col-md-4">
-              <q-input clearable outlined stack-label v-model="middleName" label="Middle Name" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase validation-bg"/>
+              <q-input clearable outlined stack-label v-model="middleName" @blur="(saveData('middleName'))" label="Middle Name" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase validation-bg"/>
             </div>
             <div class="col-12 col-md-4">
-              <q-input clearable outlined stack-label v-model="lastName" label="Last Name" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase validation-bg"/>
+              <q-input clearable outlined stack-label v-model="lastName" @blur="(saveData('lastName'))" label="Last Name" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase validation-bg"/>
             </div>
           </div>
 
           <div class="row q-mt-md text-h6">
             <div class="col-12 col-md-6">
-              <q-input clearable outlined stack-label v-model="presentAddress" label="Present Address" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase"/>
+              <q-input clearable outlined stack-label v-model="presentAddress" @blur="(saveData('presentAddress'))" label="Present Address" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase"/>
             </div>
             <div class="col-6 col-md-3">
-              <q-input clearable outlined stack-label v-model="presentCity" label="Present City" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase"/>
+              <q-input clearable outlined stack-label v-model="presentCity" @blur="(saveData('presentCity'))" label="Present City" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase"/>
             </div>
             <div class="col-6 col-md-3">
-              <q-input clearable outlined stack-label v-model="presentProvince" label="Present Province" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase"/>
+              <q-input clearable outlined stack-label v-model="presentProvince" @blur="(saveData('presentProvince'))" label="Present Province" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase"/>
             </div>
           </div>
 
@@ -81,33 +64,33 @@
 
           <div class="row q-mt-md text-h6">
             <div class="col-12 col-md-6">
-              <q-input clearable outlined stack-label :disable="samePresent === true" v-model="permanentAddress" label="Permanent Address" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase"/>
+              <q-input clearable outlined stack-label :disable="samePresent === true" v-model="permanentAddress" @blur="(saveData('permanentAddress'))" label="Permanent Address" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase"/>
             </div>
             <div class="col-6 col-md-3">
-              <q-input clearable outlined stack-label :disable="samePresent === true" v-model="permanentCity" label="Permanent City" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase"/>
+              <q-input clearable outlined stack-label :disable="samePresent === true" v-model="permanentCity" @blur="(saveData('permanentCity'))" label="Permanent City" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase"/>
             </div>
             <div class="col-6 col-md-3">
-              <q-input clearable outlined stack-label :disable="samePresent === true" v-model="permanentProvince" label="Permanent Province" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase" />            </div>
+              <q-input clearable outlined stack-label :disable="samePresent === true" v-model="permanentProvince" @blur="(saveData('permanentProvince'))" label="Permanent Province" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase" />            </div>
           </div>
 
           <div class="row q-mt-md text-h6">
             <div class="col-12 col-md-4">
-              <q-input clearable outlined stack-label type="tel" mask="(###) ####-####" v-model="landlinePhone" label="Landline Phone" class="q-ma-xs bg-grey-1 text-uppercase"/>
+              <q-input clearable outlined stack-label type="tel" mask="(###) ####-####" v-model="landlinePhone" @blur="(saveData('landlinePhone'))" label="Landline Phone" class="q-ma-xs bg-grey-1 text-uppercase"/>
             </div>
             <div class="col-12 col-md-4">
-              <q-input clearable outlined stack-label type="tel" mask="(####) ###-####" v-model="mobilePhone" label="Mobile Phone" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase"/>
+              <q-input clearable outlined stack-label type="tel" mask="(####) ###-####" v-model="mobilePhone" @blur="(saveData('mobilePhone'))" label="Mobile Phone" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase"/>
             </div>
             <div class="col-12 col-md-4">
-              <q-input clearable outlined stack-label type="email" v-model="emailAddress" label="Email Address" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase"/>
+              <q-input clearable outlined stack-label type="email" v-model="emailAddress" @blur="(saveData('emailAddress'))" label="Email Address" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase"/>
             </div>
           </div>
 
           <div class="row q-mt-md text-h6">
             <div class="col-6 col-md-4">
-              <q-select clearable outlined stack-label options-dense v-model="sex" :options="sexOptions" label="Sex" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase"/>
+              <q-select clearable outlined stack-label options-dense v-model="sex" :options="sexOptions" @blur="(saveData('sex'))" label="Sex" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase"/>
             </div>
             <div class="col-6 col-md-4">
-              <q-input clearable outlined stack-label type="text" v-model="birthDate" @blur="calculateAge" placeholder="MM/DD/YYYY" label="Birthdate" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase">
+              <q-input clearable outlined stack-label type="text" v-model="birthDate" @blur="calculateAge; saveData('birthDate')" placeholder="MM/DD/YYYY" label="Birthdate" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase">
                 <template v-slot:append>
                   <q-icon name="mdi-calendar" class="cursor-pointer">
                     <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
@@ -124,7 +107,8 @@
           </div>
 
           <q-stepper-navigation class="row justify-end content-end">
-          <q-btn :disable="disableButton1" @click="() => { scrollTop(); done1 = true; step = 2; }" color="primary" label="Continue" class="martel"/>
+            <q-btn flat @click="cancelApplication" color="primary" label="Cancel Application" class="martel q-mr-sm" />
+            <q-btn :disable="disableButton1" @click="() => { scrollTop(); done1 = true; step = 2; }" color="primary" label="Continue" class="martel"/>
           </q-stepper-navigation>
         </q-step>
 
@@ -274,8 +258,9 @@
           </div>
 
           <q-stepper-navigation class="row justify-end content-end">
-          <q-btn flat @click="step = 1" color="primary" label="Back" class="martel q-mr-sm" />
-          <q-btn :disable="disableButton2" @click="() => { scrollTop(); done2 = true; step = 3 }" color="primary" label="Continue" class="martel"/>
+            <q-btn flat @click="cancelApplication" color="primary" label="Cancel Application" class="martel q-mr-sm" />
+            <q-btn flat @click="step = 1" color="primary" label="Back" class="martel q-mr-sm" />
+            <q-btn :disable="disableButton2" @click="() => { scrollTop(); done2 = true; step = 3 }" color="primary" label="Continue" class="martel"/>
           </q-stepper-navigation>
         </q-step>
 
@@ -354,21 +339,9 @@
           </div>
 
           <q-stepper-navigation class="row justify-end content-end">
-
-          <q-btn
-            flat
-            @click="step = 2"
-            color="primary"
-            label="Back"
-            class="martel q-mr-sm" />
-
-          <q-btn
-            type="submit"
-            color="primary"
-            :disable="disableButton3"
-            @click="done3 = true"
-            label="Proceed To Payment"
-            class="martel" />
+            <q-btn flat @click="cancelApplication" color="primary" label="Cancel Application" class="martel q-mr-sm" />
+            <q-btn flat @click="step = 2" color="primary" label="Back" class="martel q-mr-sm" />
+            <q-btn type="submit" color="primary" :disable="disableButton3" @click="done3 = true" label="Proceed To Payment" class="martel" />
 
           </q-stepper-navigation>
         </q-step>
@@ -379,7 +352,7 @@
 
 <script>
 import { ref, watchEffect, computed } from 'vue'
-import { useQuasar, uid, openURL } from 'quasar'
+import { useQuasar, uid, date, openURL } from 'quasar'
 import { bux_api } from 'boot/axios'
 //import channelData from '../assets/channels.json'
 
@@ -387,49 +360,14 @@ export default {
   name: 'ApplicationPage',
   
   setup () {
-    let uuid = uid() //generate user ID session
-    // Verify session
-    /* const session = $q.sessionStorage.getItem('session-date')
-    if (session){
-
-    }else{
-
-    } */
-
     const $q = useQuasar()
     const step = ref(1)
     const done1 = ref(false)
     const done2 = ref(false)
     const done3 = ref(false)
 
-    // Clear Local Storage of any previously saved data
-    $q.localStorage.set('uuid','')
-    $q.localStorage.set('firstName','')
-    $q.localStorage.set('middleName','')
-    $q.localStorage.set('lastName','')
-    $q.localStorage.set('presentAddress','')
-    $q.localStorage.set('presentCity','')
-    $q.localStorage.set('presentProvince','')
-    $q.localStorage.set('permanentAddress','')
-    $q.localStorage.set('permanentCity','')
-    $q.localStorage.set('permanentProvince','')
-    $q.localStorage.set('landlinePhone','')
-    $q.localStorage.set('mobilePhone','')
-    $q.localStorage.set('emailAddress','')
-    $q.localStorage.set('sex','')
-    $q.localStorage.set('birthDate','')
-    $q.localStorage.set('pay_checkouturl','')
-    $q.localStorage.set('pay_refcode','')
-    $q.localStorage.set('pay_code','')
-    $q.localStorage.set('pay_seller','')
-    $q.localStorage.set('pay_imageurl','')
-    $q.localStorage.set('pay_created','')
-    $q.localStorage.set('pay_expiry','')
-    $q.localStorage.set('pay_amount','')
-    $q.localStorage.set('pay_description','')
-    $q.localStorage.set('pay_instruction','')
-
     // form data
+    let uuid = uid() //generate user ID session
     let firstName = ref(null)
     let middleName = ref(null)
     let lastName = ref(null)
@@ -568,9 +506,11 @@ export default {
         $q.dialog({
           title: 'Alert',
           html: true,
+          class: 'quattro',
           message: '<p>An error occurred while trying to access the Payment Channels API. Please try again in a few minutes to check if the situation has been resolved.</p><p style="font-weight:bold;">'+error+'</p>',
           ok: {
-            push: true
+            color: 'primary',
+            class: 'martel'
           }
         })
       })
@@ -600,6 +540,59 @@ export default {
     let disableButton2 = ref(false)
     let disableButton3 = ref(false)
 
+    // Verify session
+    const session = $q.sessionStorage.getItem('session-date')
+    if (session){
+      $q.dialog({
+        title: 'Confirm',
+        persistent: true,
+        html: true,
+        cancel: true,
+        class: 'quattro',
+        message: `It appears you have a pending application. Do you wish to continue your session of ${date.formatDate(session,'dddd, MMMM D, YYYY h:mm A')}?`,
+        ok: {
+          label: 'Yes, continue',
+          color: 'primary',
+          class: 'martel'
+        },
+        cancel: {
+          label: 'No, begin a fresh one',
+          flat: true,
+          class: 'martel'
+        }
+      }).onOk(() => {
+        // load session and previous data
+        firstName.value = $q.localStorage.getItem('firstName')
+        middleName.value = $q.localStorage.getItem('middleName')
+        lastName.value = $q.localStorage.getItem('lastName')
+        presentAddress.value = $q.localStorage.getItem('presentAddress')
+        presentCity.value = $q.localStorage.getItem('presentCity')
+        presentProvince.value = $q.localStorage.getItem('presentProvince')
+        permanentAddress.value = $q.localStorage.getItem('permanentAddress')
+        permanentCity.value = $q.localStorage.getItem('permanentCity')
+        permanentProvince.value = $q.localStorage.getItem('permanentProvince')
+        samePresent.value = $q.localStorage.getItem('samePresent')
+        landlinePhone.value = $q.localStorage.getItem('landlinePhone')
+        mobilePhone.value = $q.localStorage.getItem('mobilePhone')
+        emailAddress.value = $q.localStorage.getItem('emailAddress')
+        sex.value = $q.localStorage.getItem('sex')
+        birthDate.value = $q.localStorage.getItem('birthDate')
+        if ($q.localStorage.getItem('plan')){
+          plan.value = $q.localStorage.getItem('plan')
+          addon1.value = $q.localStorage.getItem('addon1')
+          addon2.value = $q.localStorage.getItem('addon2')
+          addon3.value = $q.localStorage.getItem('addon3')
+        }
+      }).onCancel(() => {
+        clearSession()
+        $q.sessionStorage.set('session-date',Date.now())
+        $q.localStorage.set('uuid',uuid)
+      })
+    }else{
+      $q.sessionStorage.set('session-date',Date.now())
+      $q.localStorage.set('uuid',uuid)
+    }
+
     watchEffect(
       () => {
         // watch for checkbox
@@ -607,6 +600,9 @@ export default {
           permanentAddress.value = presentAddress.value
           permanentCity.value = presentCity.value
           permanentProvince.value = presentProvince.value
+          $q.localStorage.set('permanentAddress',toUpperCase(presentAddress.value))
+          $q.localStorage.set('permanentCity',toUpperCase(presentCity.value))
+          $q.localStorage.set('permanentProvince',toUpperCase(presentProvince.value))
         }
 
         // first Continue button
@@ -616,29 +612,85 @@ export default {
             mobilePhone.value && emailAddress.value && sex.value && birthDate.value)
         {
           disableButton1.value = false
-
-          // Store applicant data to Local Storage 
-          $q.localStorage.set('uuid',uuid)
-          $q.localStorage.set('firstName',toUpperCase(firstName.value))
-          $q.localStorage.set('middleName',toUpperCase(middleName.value))
-          $q.localStorage.set('lastName',toUpperCase(lastName.value))
-          $q.localStorage.set('presentAddress',toUpperCase(presentAddress.value))
-          $q.localStorage.set('presentCity',toUpperCase(presentCity.value))
-          $q.localStorage.set('presentProvince',toUpperCase(presentProvince.value))
-          $q.localStorage.set('permanentAddress',toUpperCase(permanentAddress.value))
-          $q.localStorage.set('permanentCity',toUpperCase(permanentCity.value))
-          $q.localStorage.set('permanentProvince',toUpperCase(permanentProvince.value))
-          $q.localStorage.set('landlinePhone',landlinePhone.value)
-          $q.localStorage.set('mobilePhone',mobilePhone.value)
-          $q.localStorage.set('emailAddress',emailAddress.value)
-          $q.localStorage.set('sex',sex.value)
-          $q.localStorage.set('birthDate',birthDate.value)
         }else{ 
           disableButton1.value = true
         }
 
+        if (done2.value === true){
+          $q.localStorage.set('plan',plan.value)
+          $q.localStorage.set('addon1',addon1.value)
+          $q.localStorage.set('addon2',addon2.value)
+          $q.localStorage.set('addon3',addon3.value)
+        }
       }
     )
+
+    const clearSession = () => {
+      // Clear Local Storage and Session of any previously saved data
+      $q.sessionStorage.set('session-date','')
+
+      $q.localStorage.set('uuid','')
+      $q.localStorage.set('firstName','')
+      $q.localStorage.set('middleName','')
+      $q.localStorage.set('lastName','')
+      $q.localStorage.set('presentAddress','')
+      $q.localStorage.set('presentCity','')
+      $q.localStorage.set('presentProvince','')
+      $q.localStorage.set('permanentAddress','')
+      $q.localStorage.set('permanentCity','')
+      $q.localStorage.set('permanentProvince','')
+      $q.localStorage.set('landlinePhone','')
+      $q.localStorage.set('mobilePhone','')
+      $q.localStorage.set('emailAddress','')
+      $q.localStorage.set('sex','')
+      $q.localStorage.set('birthDate','')
+      $q.localStorage.set('plan','')
+      $q.localStorage.set('addon1','')
+      $q.localStorage.set('addon2','')
+      $q.localStorage.set('addon3','')
+      $q.localStorage.set('pay_checkouturl','')
+      $q.localStorage.set('pay_refcode','')
+      $q.localStorage.set('pay_code','')
+      $q.localStorage.set('pay_seller','')
+      $q.localStorage.set('pay_imageurl','')
+      $q.localStorage.set('pay_created','')
+      $q.localStorage.set('pay_expiry','')
+      $q.localStorage.set('pay_amount','')
+      $q.localStorage.set('pay_description','')
+      $q.localStorage.set('pay_instruction','')
+    }
+
+    const cancelApplication = () => {
+      $q.dialog({
+        title: 'Confirm',
+        persistent: true,
+        html: true,
+        cancel: true,
+        class: 'quattro',
+        message: '<p class="text-subtitle1 text-bold">Do you really wish to cancel your application?</p><p>It only takes about 5 minutes to ensure your safety and peace of mind.</p>',
+        ok: {
+          label: 'I want to continue',
+          color: 'primary',
+          class: 'martel'
+        },
+        cancel: {
+          label: 'Yes, cancel it',
+          flat: true,
+          class: 'martel'
+        }
+      }).onOk(() => {
+        // Continue with application
+      }).onCancel(() => {
+        // Clear session and stored data
+        clearSession()
+        // Redirect to home
+        window.open('#/','_self')
+      })
+    }
+
+    const saveData = (fielddata) => {
+      $q.localStorage.set(fielddata,toUpperCase(eval(fielddata).value))
+    }
 
     const scrollTop = () => {
       window.scrollTo(0,0);
@@ -680,10 +732,12 @@ export default {
 
     const showAgeDialog = () => {
       $q.dialog({
-        title: 'Alert',
-        message: `As a matter of policy, age eligibility of the applicant must be 18 years old at the time of enrollment and has not reached the 65th birthday at the inception of the insurance coverage.`,
+        title: 'Oops!',
+        class: 'quattro',
+        message: 'As a matter of policy, age eligibility of the applicant must be 18 years old at the time of enrollment and has not reached the 65th birthday at the inception of the insurance coverage.',
         ok: {
-          push: true
+          color: 'primary',
+          class: 'martel'
         }
       }).onOk(() => {
         birthDate.value = null
@@ -753,6 +807,9 @@ export default {
       pay_checkout_url,
       totalToPay,
 
+      clearSession,
+      cancelApplication,
+      saveData,
       scrollTop,
       toUpperCase,
       getOutletOptions,
@@ -831,9 +888,11 @@ export default {
             $q.dialog({
               title: 'Alert',
               html: true,
+              class: 'quattro',
               message: '<p>An error occurred while trying to access the selected Payment Channels API. Please try again in a few minutes to check if the situation has been resolved or select a different Payment Channel.</p><p style="font-weight:bold;">'+error+'</p>',
               ok: {
-                push: true
+                color: 'primary',
+                class: 'martel'
               }
             })
           })
