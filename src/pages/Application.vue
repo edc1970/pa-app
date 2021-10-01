@@ -107,7 +107,19 @@
               <q-select clearable outlined stack-label options-dense v-model="sex" :options="sexOptions" label="Sex" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase"/>
             </div>
             <div class="col-6 col-md-4">
-              <q-input clearable outlined stack-label type="date" v-model="birthDate" @blur="calculateAge" label="Birthdate" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase"/>
+              <q-input clearable outlined stack-label type="text" v-model="birthDate" @blur="calculateAge" placeholder="MM/DD/YYYY" label="Birthdate" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase">
+                <template v-slot:append>
+                  <q-icon name="mdi-calendar" class="cursor-pointer">
+                    <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
+                      <q-date v-model="birthDate" mask="MM/DD/YYYY">
+                        <div class="row items-center justify-end">
+                          <q-btn v-close-popup label="Close" color="primary" flat />
+                        </div>
+                      </q-date>
+                    </q-popup-proxy>
+                  </q-icon>
+                </template>
+              </q-input>
             </div>
           </div>
 
@@ -376,6 +388,14 @@ export default {
   
   setup () {
     let uuid = uid() //generate user ID session
+    // Verify session
+    /* const session = $q.sessionStorage.getItem('session-date')
+    if (session){
+
+    }else{
+
+    } */
+
     const $q = useQuasar()
     const step = ref(1)
     const done1 = ref(false)
@@ -666,7 +686,7 @@ export default {
           push: true
         }
       }).onOk(() => {
-        birthDate.value = new Date()
+        birthDate.value = null
       })
     }
 
