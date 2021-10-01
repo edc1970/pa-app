@@ -5,7 +5,7 @@
       enter-active-class="animated fadeIn"
       leave-active-class="animated fadeOut"
     >
-      <div class="full-width gt-xs">
+      <div class="full-width">
         <q-img 
           loading="eager"
           alt="Medical image background"
@@ -42,6 +42,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  div.q-img {
+    height: 100vh;
+  }
   .hero-text {
     padding: 30px;
     width: 60%; 
@@ -51,16 +54,19 @@ export default {
   }
 
   @media screen and (max-width: 1023px){
+    div.q-img {
+      height: 50vh;
+    }
     .hero-text {
       width: 80%;
     }
     .hero-text > .hero-heading {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       line-height: 1.5rem;
     }
 
     .hero-text > .hero-subheading {
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       line-height: 1.4rem;
     }
   }
