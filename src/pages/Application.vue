@@ -551,7 +551,7 @@ export default {
         html: true,
         cancel: true,
         class: 'quattro',
-        message: `It appears you have a pending application. Do you wish to continue your session of ${date.formatDate(session,'dddd, MMMM D, YYYY h:mm A')}?`,
+        message: `It appears you have previously started an application. Do you wish to continue your session of <b>${date.formatDate(session,'dddd, MMMM D, YYYY h:mm A')}</b>?`,
         ok: {
           label: 'Yes, continue',
           color: 'primary',
