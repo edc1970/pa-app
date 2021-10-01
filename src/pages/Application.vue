@@ -542,7 +542,9 @@ export default {
 
     // Verify session
     const session = $q.sessionStorage.getItem('session-date')
-    if (session){
+    const session_done = $q.sessionStorage.getItem('session-done')
+
+    if (session && session_done == ''){
       $q.dialog({
         title: 'Confirm',
         persistent: true,
@@ -589,7 +591,9 @@ export default {
         $q.localStorage.set('uuid',uuid)
       })
     }else{
+      clearSession()
       $q.sessionStorage.set('session-date',Date.now())
+      $q.sessionStorage.set('session-done','')
       $q.localStorage.set('uuid',uuid)
     }
 
@@ -625,9 +629,10 @@ export default {
       }
     )
 
-    const clearSession = () => {
+    function clearSession() {
       // Clear Local Storage and Session of any previously saved data
       $q.sessionStorage.set('session-date','')
+      $q.sessionStorage.set('session-done','')
 
       $q.localStorage.set('uuid','')
       $q.localStorage.set('firstName','')
@@ -881,6 +886,7 @@ export default {
 
             console.log('Application done.')
             // Show finished application page
+            $q.sessionStorage.set('session-done','true')
             window.open('#/application-done','_self')
           })
           .catch(error => {
@@ -899,7 +905,6 @@ export default {
       }
     }
   },
-  
 }
 </script>
 
