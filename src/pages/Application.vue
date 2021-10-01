@@ -46,14 +46,14 @@
             </div>
           </div>
 
-          <div class="row q-mt-md text-h6">
+          <div class="row q-mt-sm text-h6">
             <div class="col-12 col-md-6">
               <q-input clearable outlined stack-label v-model="presentAddress" @blur="(saveData('presentAddress'))" label="Present Address" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase"/>
             </div>
-            <div class="col-6 col-md-3">
+            <div class="col-12 col-md-3">
               <q-input clearable outlined stack-label v-model="presentCity" @blur="(saveData('presentCity'))" label="Present City" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase"/>
             </div>
-            <div class="col-6 col-md-3">
+            <div class="col-12 col-md-3">
               <q-input clearable outlined stack-label v-model="presentProvince" @blur="(saveData('presentProvince'))" label="Present Province" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase"/>
             </div>
           </div>
@@ -62,18 +62,18 @@
             <q-checkbox v-model="samePresent" label="Permanent address is the same with present address"/>
           </div>
 
-          <div class="row q-mt-md text-h6">
+          <div class="row q-mt-sm text-h6">
             <div class="col-12 col-md-6">
               <q-input clearable outlined stack-label :disable="samePresent === true" v-model="permanentAddress" @blur="(saveData('permanentAddress'))" label="Permanent Address" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase"/>
             </div>
-            <div class="col-6 col-md-3">
+            <div class="col-12 col-md-3">
               <q-input clearable outlined stack-label :disable="samePresent === true" v-model="permanentCity" @blur="(saveData('permanentCity'))" label="Permanent City" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase"/>
             </div>
-            <div class="col-6 col-md-3">
+            <div class="col-12 col-md-3">
               <q-input clearable outlined stack-label :disable="samePresent === true" v-model="permanentProvince" @blur="(saveData('permanentProvince'))" label="Permanent Province" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase" />            </div>
           </div>
 
-          <div class="row q-mt-md text-h6">
+          <div class="row q-mt-sm text-h6">
             <div class="col-12 col-md-4">
               <q-input clearable outlined stack-label type="tel" mask="(###) ####-####" v-model="landlinePhone" @blur="(saveData('landlinePhone'))" label="Landline Phone" class="q-ma-xs bg-grey-1 text-uppercase"/>
             </div>
@@ -85,12 +85,12 @@
             </div>
           </div>
 
-          <div class="row q-mt-md text-h6">
-            <div class="col-6 col-md-4">
+          <div class="row q-mt-sm text-h6">
+            <div class="col-12 col-md-4">
               <q-select clearable outlined stack-label options-dense v-model="sex" :options="sexOptions" @blur="(saveData('sex'))" label="Sex" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase"/>
             </div>
-            <div class="col-6 col-md-4">
-              <q-input clearable outlined stack-label type="text" v-model="birthDate" @blur="calculateAge; saveData('birthDate')" placeholder="MM/DD/YYYY" label="Birthdate" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase">
+            <div class="col-12 col-md-4">
+              <q-input clearable outlined stack-label type="text" v-model="birthDate" @blur="calculateAge(); saveData('birthDate')" placeholder="MM/DD/YYYY" label="Birthdate" :rules="[val => !!val || 'Field is required']" class="q-ma-xs bg-grey-1 text-uppercase">
                 <template v-slot:append>
                   <q-icon name="mdi-calendar" class="cursor-pointer">
                     <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
@@ -288,7 +288,7 @@
             </div>
 
             <div class="col-12 col-md-6">
-              <div class="text-h6 text-bold">
+              <div class="text-subtitle1 text-bold">
                 Total Amount To Pay:<span class="text-right text-h5 text-bold float-right q-pr-sm">₱ {{new Intl.NumberFormat().format(totalToPay)}}</span>
               </div>
 
@@ -739,7 +739,8 @@ export default {
       $q.dialog({
         title: 'Oops!',
         class: 'quattro',
-        message: 'As a matter of policy, age eligibility of the applicant must be 18 years old at the time of enrollment and has not reached the 65th birthday at the inception of the insurance coverage.',
+        html: true,
+        message: 'As a matter of policy, age eligibility of the applicant <b>must be 18 years old</b> at the time of enrollment <b>and has not reached the 65th birthday</b> at the inception of the insurance coverage.',
         ok: {
           color: 'primary',
           class: 'martel'

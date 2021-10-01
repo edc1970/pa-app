@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page>
     <transition
       appear
       enter-active-class="animated fadeIn"
@@ -42,6 +42,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  .q-page {
+    min-height: 100vh;
+  }
   div.q-img {
     height: 100vh;
   }
@@ -55,7 +58,7 @@ export default {
 
   @media screen and (max-width: 1023px){
     div.q-img {
-      height: 50vh;
+      height: 70vh;
     }
     .hero-text {
       width: 80%;
@@ -64,10 +67,12 @@ export default {
       font-size: 1.5rem;
       line-height: 1.5rem;
     }
-
     .hero-text > .hero-subheading {
       font-size: 1.2rem;
       line-height: 1.4rem;
+    }
+    p.text-h3 {
+      font-size: 2.5rem;
     }
   }
 </style>
