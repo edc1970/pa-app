@@ -1,4 +1,4 @@
-{
+{ 
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
@@ -31,7 +31,6 @@
   "exclude": [
     "dist",
     ".quasar",
-    "node_modules",
-    "backend",
+    "node_modules"
   ]
 }
