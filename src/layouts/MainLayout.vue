@@ -179,7 +179,7 @@ export default {
       {
         icon: '',
         label: 'How To File A Claim',
-        link: '#/file-a-claim',
+        link: '/file-a-claim',
         separator: true
       },
       {

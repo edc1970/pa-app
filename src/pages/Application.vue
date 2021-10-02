@@ -108,7 +108,7 @@
 
           <q-stepper-navigation class="row justify-end content-end">
             <q-btn flat @click="cancelApplication" color="primary" label="Cancel Application" class="martel q-mr-sm" />
-            <q-btn :disable="disableButton1" @click="() => { scrollTop(); done1 = true; step = 2; }" color="primary" label="Continue" class="martel"/>
+            <q-btn :disable="disableButton1" @click="{ scrollTop(); done1 = true; step = 2; }" color="primary" label="Continue" class="martel"/>
           </q-stepper-navigation>
         </q-step>
 
@@ -260,7 +260,7 @@
           <q-stepper-navigation class="row justify-end content-end">
             <q-btn flat @click="cancelApplication" color="primary" label="Cancel Application" class="martel q-mr-sm" />
             <q-btn flat @click="step = 1" color="primary" label="Back" class="martel q-mr-sm" />
-            <q-btn :disable="disableButton2" @click="() => { scrollTop(); done2 = true; step = 3 }" color="primary" label="Continue" class="martel"/>
+            <q-btn :disable="disableButton2" @click="{ scrollTop(); done2 = true; step = 3 }" color="primary" label="Continue" class="martel"/>
           </q-stepper-navigation>
         </q-step>
 
@@ -353,7 +353,7 @@
 <script>
 import { ref, watchEffect, computed } from 'vue'
 import { useQuasar, uid, date, openURL } from 'quasar'
-import { bux_api } from 'boot/axios'
+import { bux_api, db_api } from 'boot/axios'
 //import channelData from '../assets/channels.json'
 
 export default {
@@ -390,6 +390,7 @@ export default {
     let addonNumber = ref(null)
 
     let plan = ref(1) // default is Plan A 
+    //let planOptions = getPlans()
     let planOptions = [  // later we load this value from the database
       {
         id: '1', 
@@ -629,6 +630,17 @@ export default {
       }
     )
 
+    function getPlans(){
+      db_api
+        .get('getplans.php')
+        .then(res => {
+          console.log(res.data)
+        })
+        .catch(error => {
+          console.error(error.response)
+        })
+    }
+
     function clearSession() {
       // Clear Local Storage and Session of any previously saved data
       $q.sessionStorage.set('session-date','')
@@ -689,7 +701,7 @@ export default {
         // Clear session and stored data
         clearSession()
         // Redirect to home
-        window.open('#/','_self')
+        window.open('/','_self')
       })
     }
 
@@ -697,7 +709,7 @@ export default {
       $q.localStorage.set(fielddata,toUpperCase(eval(fielddata).value))
     }
 
-    const scrollTop = () => {
+    function scrollTop() {
       window.scrollTo(0,0);
     }
 
@@ -845,8 +857,8 @@ export default {
             "email": $q.localStorage.getItem('emailAddress'),
             "contact": $q.localStorage.getItem('mobilePhone'),
             "name": $q.localStorage.getItem('firstName') + ' ' + $q.localStorage.getItem('middleName') + ' ' + $q.localStorage.getItem('lastName'),
-            "notification_url": "https://philsecure-pa.netlify.app/#/bux_notif",
-            "redirect_url": "https://philsecure-pa.netlify.app/#/application-done",
+            "notification_url": "https://philsecure-pa.netlify.app/bux_notif",
+            "redirect_url": "https://philsecure-pa.netlify.app/application-done",
             "param1": "",
             "param2": "",
             "cust_shoulder": 0
@@ -888,7 +900,7 @@ export default {
             console.log('Application done.')
             // Show finished application page
             $q.sessionStorage.set('session-done','true')
-            window.open('#/application-done','_self')
+            window.open('/application-done','_self')
           })
           .catch(error => {
             //console.log(error)
