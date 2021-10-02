@@ -34,3 +34,4 @@ yarn-error.log*
 
 # ignore backend app
 backend
+mysqldb
