@@ -10,9 +10,26 @@ const apiBaseUrl = process.env.API_URL
 const apiKey = process.env.API_KEY
 const client_id = process.env.API_CLIENT_ID
 
+const apiIpGeo = process.env.API_IP_GEO
+const apiKeyIpGeo = process.env.API_KEY_IP_GEO
+
 app.use(cors())
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
+
+// API Route for IP GeoLocation
+app.get('/ip_geolocation'), (request, response) => {
+  let query = request.query
+  query.api_key = apiKeyIpGeo
+  
+  let queryString = qs.stringify(query)
+  axios(`${apiIpGeo}?${queryString}`)
+  .then(res => {
+    response.send(res.data)
+  }).catch(error => {
+    console.log(error)
+  })
+}
 
 // API Route for channel_codes
 app.get('/channel_codes', (request, response) => {
