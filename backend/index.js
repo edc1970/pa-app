@@ -33,6 +33,7 @@ app.get('/channel_codes', (request, response) => {
 
 // API Route for generate_code
 app.post('/generate_code', (request, response) => {
+  response.set('Access-Control-Allow-Origin','*')
   let payload = request.body
   
   payload.client_id = client_id

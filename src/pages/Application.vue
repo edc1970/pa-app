@@ -339,10 +339,21 @@
           </div>
 
           <q-stepper-navigation class="row justify-end content-end">
-            <q-btn flat @click="cancelApplication" color="primary" label="Cancel Application" class="martel q-mr-sm" />
-            <q-btn flat @click="step = 2" color="primary" label="Back" class="martel q-mr-sm" />
-            <q-btn type="submit" color="primary" :disable="disableButton3" @click="done3 = true" label="Proceed To Payment" class="martel" />
-
+            <q-btn flat :disable="disableCancel" @click="cancelApplication" color="primary" label="Cancel Application" class="martel q-mr-sm" />
+            <q-btn flat :disable="disableBack" @click="step = 2" color="primary" label="Back" class="martel q-mr-sm" />
+            <q-btn
+              type="submit"
+              color="primary"
+              :disable="disableButton3"
+              :loading="submitting"
+              @click="done3 = true"
+              label="Proceed To Payment"
+              class="martel">
+              <template v-slot:loading>
+                <q-spinner-gears class="on-left" color="white"/>
+                Processing...
+              </template>
+            </q-btn>
           </q-stepper-navigation>
         </q-step>
       </q-stepper>
@@ -540,6 +551,9 @@ export default {
     let disableButton1 = ref(false)
     let disableButton2 = ref(false)
     let disableButton3 = ref(false)
+    let disableCancel = ref(false)
+    let disableBack = ref(false)
+    const submitting = ref(false)
 
     // Verify session
     const session = $q.sessionStorage.getItem('session-date')
@@ -838,6 +852,9 @@ export default {
       disableButton1,
       disableButton2,
       disableButton3,
+      disableCancel,
+      disableBack,
+      submitting,
 
       uuid,
 
@@ -845,6 +862,10 @@ export default {
       submitForm() {
         // do something when form is submitted
         console.log('Processing payment...')
+        submitting.value = true
+        disableButton3.value = true
+        disableCancel.value = true
+        disableBack.value = true
         //console.log(pay_code.value)
         bux_api
           .post('/generate_code',
@@ -865,6 +886,10 @@ export default {
           })
           .then(res => {
             //console.log(res.data)
+            submitting.value = false
+            disableButton3.value = false
+            disableCancel.value = false
+            disableBack.value = false
             if (res.data.payment_url){
               pay_checkout_url.value = res.data.payment_url
               pay_refcode.value = res.data.ref_code
@@ -903,12 +928,16 @@ export default {
             window.open('/application-done','_self')
           })
           .catch(error => {
-            //console.log(error)
+            submitting.value = false
+            disableButton3.value = false
+            disableCancel.value = false
+            disableBack.value = false
+            console.log(error)
             $q.dialog({
               title: 'Alert',
               html: true,
               class: 'quattro',
-              message: '<p>An error occurred while trying to access the selected Payment Channels API. Please try again in a few minutes to check if the situation has been resolved or select a different Payment Channel.</p><p style="font-weight:bold;">'+error+'</p>',
+              message: '<p>An error occurred while trying to access the selected Payment Channel. Please try again in a few minutes to check if the situation has been resolved or select a different Payment Channel if the error persist.</p><p style="font-weight:bold;">'+error+'</p>',
               ok: {
                 color: 'primary',
                 class: 'martel'
