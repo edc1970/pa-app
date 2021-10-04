@@ -364,7 +364,7 @@
 <script>
 import { ref, watchEffect, computed } from 'vue'
 import { useQuasar, uid, date, openURL } from 'quasar'
-import { bux_api, db_api } from 'boot/axios'
+import { axios, bux_api, db_api } from 'boot/axios'
 //import channelData from '../assets/channels.json'
 
 export default {
@@ -505,16 +505,39 @@ export default {
     let pay_refcode = ref(null)
     let pay_checkout_url = ref(null)
 
+    /* Verify Geolocation */
+
+    axios.get('https://freegeoip.app/json')
+      .then(res => {
+        console.log(res.data.country)
+        if (!res.data.country === 'Philippines'){
+          $q.dialog({
+            title: 'Alert',
+            html: true,
+            class: 'quattro',
+            message: `<h5>Our apologies! This product is not yet available in ${res.data.country}</h5>`,
+            ok: {
+              color: 'primary',
+              class: 'martel text-center'
+            }
+          })
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
+
     /* load payment channels from Bux.Ph */
 
     bux_api
       .get('/channel_codes')
       .then(res => {
+        console.log('Channel codes loaded.')
         channelData.value = res.data
         channelOptions.value = Object.keys(channelData.value).sort()
       })
       .catch(error => {
-        console.log(error.response)
+        //console.log(error.response)
         $q.dialog({
           title: 'Alert',
           html: true,
