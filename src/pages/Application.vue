@@ -376,6 +376,10 @@ export default {
     const done1 = ref(false)
     const done2 = ref(false)
     const done3 = ref(false)
+    
+    // Verify session
+    const session = $q.sessionStorage.getItem('session-date')
+    const session_done = $q.sessionStorage.getItem('session-done')
 
     // form data
     let uuid = uid() //generate user ID session
@@ -505,27 +509,36 @@ export default {
     let pay_refcode = ref(null)
     let pay_checkout_url = ref(null)
 
+    // Comment out this line when ready to implement the Geolocation check
+    checkSession(session,session_done)
+
     /* Verify Geolocation */
 
-    axios.get('https://freegeoip.app/json')
+    /* axios.get('https://iplist.cc/api')
       .then(res => {
-        console.log(res.data.country)
-        if (!res.data.country === 'Philippines'){
+        if (res.data.countrycode !== 'PH'){
           $q.dialog({
             title: 'Alert',
+            persistent: true,
             html: true,
-            class: 'quattro',
-            message: `<h5>Our apologies! This product is not yet available in ${res.data.country}</h5>`,
+            class: 'text-h6',
+            message: `<p style='text-align: center; line-height: 1.2; color: #505050;'>Our sincere apologies! This product is not yet available in <b>${res.data.countryname}</b>.</p>`,
             ok: {
               color: 'primary',
-              class: 'martel text-center'
             }
+          }).onOk(() => {
+            // Clear session and stored data
+            clearSession()
+            // Redirect to home
+            window.open('/','_self')
           })
+        }else{
+          checkSession(session,session_done)
         }
       })
       .catch(error => {
         console.log(error)
-      })
+      }) */
 
     /* load payment channels from Bux.Ph */
 
@@ -578,63 +591,6 @@ export default {
     let disableBack = ref(false)
     const submitting = ref(false)
 
-    // Verify session
-    const session = $q.sessionStorage.getItem('session-date')
-    const session_done = $q.sessionStorage.getItem('session-done')
-
-    if (session && session_done == ''){
-      $q.dialog({
-        title: 'Confirm',
-        persistent: true,
-        html: true,
-        cancel: true,
-        class: 'quattro',
-        message: `It appears you have previously started an application. Do you wish to continue your session of <b>${date.formatDate(session,'dddd, MMMM D, YYYY h:mm A')}</b>?`,
-        ok: {
-          label: 'Yes, continue',
-          color: 'primary',
-          class: 'martel'
-        },
-        cancel: {
-          label: 'No, begin a fresh one',
-          flat: true,
-          class: 'martel'
-        }
-      }).onOk(() => {
-        // load session and previous data
-        firstName.value = $q.localStorage.getItem('firstName')
-        middleName.value = $q.localStorage.getItem('middleName')
-        lastName.value = $q.localStorage.getItem('lastName')
-        presentAddress.value = $q.localStorage.getItem('presentAddress')
-        presentCity.value = $q.localStorage.getItem('presentCity')
-        presentProvince.value = $q.localStorage.getItem('presentProvince')
-        permanentAddress.value = $q.localStorage.getItem('permanentAddress')
-        permanentCity.value = $q.localStorage.getItem('permanentCity')
-        permanentProvince.value = $q.localStorage.getItem('permanentProvince')
-        samePresent.value = $q.localStorage.getItem('samePresent')
-        landlinePhone.value = $q.localStorage.getItem('landlinePhone')
-        mobilePhone.value = $q.localStorage.getItem('mobilePhone')
-        emailAddress.value = $q.localStorage.getItem('emailAddress')
-        sex.value = $q.localStorage.getItem('sex')
-        birthDate.value = $q.localStorage.getItem('birthDate')
-        if ($q.localStorage.getItem('plan')){
-          plan.value = $q.localStorage.getItem('plan')
-          addon1.value = $q.localStorage.getItem('addon1')
-          addon2.value = $q.localStorage.getItem('addon2')
-          addon3.value = $q.localStorage.getItem('addon3')
-        }
-      }).onCancel(() => {
-        clearSession()
-        $q.sessionStorage.set('session-date',Date.now())
-        $q.localStorage.set('uuid',uuid)
-      })
-    }else{
-      clearSession()
-      $q.sessionStorage.set('session-date',Date.now())
-      $q.sessionStorage.set('session-done','')
-      $q.localStorage.set('uuid',uuid)
-    }
-
     watchEffect(
       () => {
         // watch for checkbox
@@ -667,6 +623,10 @@ export default {
       }
     )
 
+    /* 
+     * All function declarations
+     */
+
     function getPlans(){
       db_api
         .get('getplans.php')
@@ -676,6 +636,61 @@ export default {
         .catch(error => {
           console.error(error.response)
         })
+    }
+
+    function checkSession(session,session_done){
+      if (session && session_done == ''){
+        $q.dialog({
+          title: 'Confirm',
+          persistent: true,
+          html: true,
+          cancel: true,
+          class: 'quattro',
+          message: `It appears you have previously started an application. Do you wish to continue your session of <b>${date.formatDate(session,'dddd, MMMM D, YYYY h:mm A')}</b>?`,
+          ok: {
+            label: 'Yes, continue',
+            color: 'primary',
+            class: 'martel'
+          },
+          cancel: {
+            label: 'No, begin a fresh one',
+            flat: true,
+            class: 'martel'
+          }
+        }).onOk(() => {
+          // load session and previous data
+          firstName.value = $q.localStorage.getItem('firstName')
+          middleName.value = $q.localStorage.getItem('middleName')
+          lastName.value = $q.localStorage.getItem('lastName')
+          presentAddress.value = $q.localStorage.getItem('presentAddress')
+          presentCity.value = $q.localStorage.getItem('presentCity')
+          presentProvince.value = $q.localStorage.getItem('presentProvince')
+          permanentAddress.value = $q.localStorage.getItem('permanentAddress')
+          permanentCity.value = $q.localStorage.getItem('permanentCity')
+          permanentProvince.value = $q.localStorage.getItem('permanentProvince')
+          samePresent.value = $q.localStorage.getItem('samePresent')
+          landlinePhone.value = $q.localStorage.getItem('landlinePhone')
+          mobilePhone.value = $q.localStorage.getItem('mobilePhone')
+          emailAddress.value = $q.localStorage.getItem('emailAddress')
+          sex.value = $q.localStorage.getItem('sex')
+          birthDate.value = $q.localStorage.getItem('birthDate')
+          if ($q.localStorage.getItem('plan')){
+            plan.value = $q.localStorage.getItem('plan')
+            addon1.value = $q.localStorage.getItem('addon1')
+            addon2.value = $q.localStorage.getItem('addon2')
+            addon3.value = $q.localStorage.getItem('addon3')
+          }
+        }).onCancel(() => {
+          clearSession()
+          $q.sessionStorage.set('session-date',Date.now())
+          $q.localStorage.set('uuid',uuid)
+        })
+      }else{
+        clearSession()
+        $q.sessionStorage.set('session-date',Date.now())
+        $q.sessionStorage.set('session-done','')
+        $q.localStorage.set('uuid',uuid)
+      }
     }
 
     function clearSession() {
