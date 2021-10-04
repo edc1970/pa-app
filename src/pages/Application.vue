@@ -510,11 +510,11 @@ export default {
     let pay_checkout_url = ref(null)
 
     // Comment out this line when ready to implement the Geolocation check
-    //checkSession(session,session_done)
+    checkSession(session,session_done)
 
     /* Verify Geolocation */
 
-    axios.get('https://iplist.cc/api')
+    /* axios.get('https://iplist.cc/api')
       .then(res => {
         if (res.data.countrycode !== 'PH'){
           $q.dialog({
@@ -538,7 +538,7 @@ export default {
       })
       .catch(error => {
         console.log(error)
-      })
+      }) */
 
     /* load payment channels from Bux.Ph */
 
@@ -988,7 +988,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 
 input[name="plan"], input[type="checkbox"] {
   transform: scale(1.5);
@@ -996,6 +996,16 @@ input[name="plan"], input[type="checkbox"] {
 
 div#showAddon1, div#showAddon2, div#showAddon3 {
   display: none;
+}
+
+div.q-card__section.q-dialog__title {
+  background-color: $negative;
+  color: white;
+  padding: 5px 10px;
+}
+
+div.q-card__section.q-dialog__message {
+  padding-top: 16px !important;
 }
 
 @media screen and (max-width: 599px){
