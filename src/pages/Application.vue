@@ -350,7 +350,7 @@
               label="Proceed To Payment"
               class="martel">
               <template v-slot:loading>
-                <q-spinner-gears class="on-left" color="white"/>
+                <q-spinner-orbit class="on-left" color="white"/>
                 Processing...
               </template>
             </q-btn>
@@ -973,6 +973,7 @@ export default {
             console.log(error)
             $q.dialog({
               title: 'Alert',
+              persistent: true,
               html: true,
               class: 'quattro',
               message: '<p>An error occurred while trying to access the selected Payment Channel. Please try again in a few minutes to check if the situation has been resolved or select a different Payment Channel if the error persist.</p><p style="font-weight:bold;">'+error+'</p>',

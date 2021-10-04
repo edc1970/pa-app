@@ -34,7 +34,7 @@
         v-model="bank"
       >
         <q-card class="text-center" style="width: 600px; max-width: 80vw;">
-          <q-card-section class="bg-primary text-white">
+          <q-card-section class="q-py-sm bg-primary text-white">
             <div class="text-h6 q-mb-none">{{ pay_code }}</div>
           </q-card-section>
           
@@ -57,7 +57,7 @@
           </q-card-section>
 
           <q-card-actions align="center" class="bg-primary text-white">
-            <q-btn flat label="OK" v-close-popup />
+            <q-btn outline color="white" label="OK" v-close-popup />
           </q-card-actions>
         </q-card>
       </q-dialog>
@@ -67,7 +67,7 @@
         v-model="non_bank"
       >
         <q-card class="text-center" style="width: 600px; max-width: 80vw;">
-          <q-card-section class="bg-primary text-white">
+          <q-card-section class="q-py-sm bg-primary text-white">
             <div class="text-h6 q-mb-none">{{ pay_code }}</div>
           </q-card-section>
 
@@ -121,8 +121,8 @@
             </div>
           </q-card-section>
 
-          <q-card-actions align="center" class="bg-primary text-white">
-            <q-btn flat label="OK" v-close-popup />
+          <q-card-actions align="center" class="q-py-sm bg-primary text-white">
+            <q-btn outline color="white" label="OK" v-close-popup />
           </q-card-actions>
         </q-card>
       </q-dialog>
@@ -170,7 +170,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 div.medical {
   background-image: url('~assets/images/medical.jpeg');
   background-size: cover;
