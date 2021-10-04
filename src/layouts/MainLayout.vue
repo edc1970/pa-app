@@ -28,7 +28,7 @@
 
         <div class="col-md-3 gt-sm">
           <div class="row float-right">
-            <q-btn v-if="!loginStatus" class="q-ml-md martel" icon="mdi-login-variant" color="secondary" type="a" to="login" label="Login" />
+            <q-btn v-if="!loginStatus" class="q-ml-md martel" icon="mdi-login-variant" color="primary" type="a" to="login" label="Login" />
 
             <q-btn v-else outline class="q-ml-md martel" label="My Account">
               <q-menu class="shadow-5">
@@ -94,7 +94,7 @@
       </template>
 
       <q-toolbar>
-        <q-btn v-if="!loginStatus" class="martel" icon="mdi-login-variant" color="secondary" type="a" to="login" label="Login" />
+        <q-btn v-if="!loginStatus" class="martel" icon="mdi-login-variant" color="primary" type="a" to="login" label="Login" />
       </q-toolbar>
     </q-drawer>
 

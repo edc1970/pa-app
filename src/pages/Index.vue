@@ -83,7 +83,7 @@
           </div>
         </div>
 
-        <div class="row bg-grey-9 q-pa-xl">
+        <div class="row bg-primary q-pa-xl">
           <div class="col-12 text-center">
             <h4 class="quattro text-grey-1 q-ma-lg q-px-xl">Do not allow yourself to worry any further.<br>Having you protected now is the right step to getting that peace of mind,<br>for you and your family.</h4>
             <q-btn
