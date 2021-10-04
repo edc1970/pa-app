@@ -510,11 +510,11 @@ export default {
     let pay_checkout_url = ref(null)
 
     // Comment out this line when ready to implement the Geolocation check
-    checkSession(session,session_done)
+    //checkSession(session,session_done)
 
     /* Verify Geolocation */
 
-    /* axios.get('https://iplist.cc/api')
+    axios.get('https://iplist.cc/api')
       .then(res => {
         if (res.data.countrycode !== 'PH'){
           $q.dialog({
@@ -538,7 +538,7 @@ export default {
       })
       .catch(error => {
         console.log(error)
-      }) */
+      })
 
     /* load payment channels from Bux.Ph */
 
