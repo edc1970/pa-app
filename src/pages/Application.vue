@@ -1,14 +1,13 @@
 <template>
-  <q-page padding>
+  <q-page padding class="bg-grey-3">
     <div class="row q-py-sm">
       <div class="full-width text-center">
-        <p class="martel text-h4 text-primary title">Personal Accident Insurance
+        <p class="martel text-h4 text-primary title q-mb-sm">Personal Accident Insurance
           <!-- <br/><span class="q-ml-md text-subtitle1 text-grey-9">Underwriter: <strong>Philippine British Assurance Company, Inc.</strong></span> -->
         </p>
+        <p class=" martel text-h5 q-py-sm sub-title text-center">Application Form</p>
       </div>
     </div>
-
-    <p class="text-h5 q-py-md text-center martel">Application Form</p>
     
     <q-form
       method="post"
@@ -20,7 +19,7 @@
         ref="stepper"
         color="primary"
         animated
-        class="bg-grey-3 quattro">
+        class="bg-white quattro shadow-5">
 
         <q-step
           :name="1"
@@ -990,6 +989,9 @@ export default {
 </script>
 
 <style lang="scss">
+.q-field__bottom {
+  background-color: #fff;
+}
 
 input[name="plan"], input[type="checkbox"] {
   transform: scale(1.5);
@@ -1013,6 +1015,10 @@ div.q-card__section.q-dialog__message {
   .title {
       font-size: 1.5rem;
       line-height: 1.5rem;
+  }
+  .sub-title {
+      font-size: 1.2rem;
+      line-height: 1.2rem;
   }
 
   .q-stepper--horizontal .q-stepper__step-inner {
