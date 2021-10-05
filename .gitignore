@@ -33,7 +33,5 @@ yarn-error.log*
 *.sln
 
 # ignore backend app
-/backend
-/mysqldb
 .vscode
 .env
