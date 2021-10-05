@@ -8,8 +8,8 @@ var qs = require('qs')
 const axios = require('axios')
 
 // declare connection to Heroku Postgres
-const { Client } = require('pg');
-const client = new Client({
+const { Pool, Client } = require('pg');
+const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
@@ -65,14 +65,20 @@ app.post('/generate_code', (request, response) => {
 })
 
 // DB query for Plans
-app.get('/getPlans',(request, response) => {
-  client.connect();
-  client.query('SELECT * FROM plans ORDER BY plans.id;',(err, res) => {
-    if (err) throw err;
-    
-    response.send = JSON.stringify(res.rows)
-    client.end()
-  })
+app.get('/get_plans', (request, response) => {
+  //pool.connect();
+  console.log('---------')
+  console.log('Get Plans')
+  console.log('---------')
+
+  pool
+    .query('SELECT * FROM plans ORDER BY plans.id;')
+    .then(res => {
+      console.log(JSON.stringify(res.rows))
+      response.send(JSON.stringify(res.rows))
+      //pool.end()
+    })
+    .catch(err => console.log(err.stack))
 })
 
 // Listen to defined port

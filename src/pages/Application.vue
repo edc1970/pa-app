@@ -363,7 +363,7 @@
 <script>
 import { ref, watchEffect, computed } from 'vue'
 import { useQuasar, uid, date, openURL } from 'quasar'
-import { axios, bux_api, db_api } from 'boot/axios'
+import { axios, bux_api  } from 'boot/axios'
 //import channelData from '../assets/channels.json'
 
 export default {
@@ -404,7 +404,43 @@ export default {
     let addonNumber = ref(null)
 
     let plan = ref(1) // default is Plan A 
-    let planOptions = getPlans()
+    let planOptions = ref([])
+
+    /* get plans from DB */
+
+    bux_api
+      .get('/get_plans')
+      .then(res => {
+        planOptions.value = res.data
+        console.log('Plan Options loaded.')
+      })
+      .catch(error => {
+        console.error(error)
+      })
+
+    /* load payment channels from Bux.Ph */
+
+    bux_api
+      .get('/channel_codes')
+      .then(res => {
+        console.log('Channel Codes loaded.')
+        channelData.value = res.data
+        channelOptions.value = Object.keys(channelData.value).sort()
+      })
+      .catch(error => {
+        //console.log(error.response)
+        $q.dialog({
+          title: 'Alert',
+          html: true,
+          class: 'quattro',
+          message: '<p>An error occurred while trying to access the Payment Channels API. Please try again in a few minutes to check if the situation has been resolved.</p><p style="font-weight:bold;">'+error+'</p>',
+          ok: {
+            color: 'primary',
+            class: 'martel'
+          }
+        })
+      })
+    
     /* let planOptions = [  // later we load this value from the database
       {
         id: '1', 
@@ -458,43 +494,43 @@ export default {
         field: 'plan'
       }
     ]
-
+    
     let planRows = computed(() => [
       {
         name: 'Accidental Death And Disablement',
-        plan: new Intl.NumberFormat().format(planOptions[plan.value-1].accidental_death)
+        plan: new Intl.NumberFormat().format(planOptions.value[plan.value-1].accidental_death)
       },
       {
         name: 'Unprovoked Murder And Assault',
-        plan: new Intl.NumberFormat().format(planOptions[plan.value-1].unprovoked_murder)
+        plan: new Intl.NumberFormat().format(planOptions.value[plan.value-1].unprovoked_murder)
       },
       {
         name: 'Motorcycling',
-        plan: new Intl.NumberFormat().format(planOptions[plan.value-1].motorcycling)
+        plan: new Intl.NumberFormat().format(planOptions.value[plan.value-1].motorcycling)
       },
       {
         name: 'Accidental Medical Reimbursement',
-        plan: new Intl.NumberFormat().format(planOptions[plan.value-1].accidental_medical)
+        plan: new Intl.NumberFormat().format(planOptions.value[plan.value-1].accidental_medical)
       },
       {
         name: 'Daily Hospital Income Benefit (Due To Accident)',
-        plan: new Intl.NumberFormat().format(planOptions[plan.value-1].daily_hospital) + ' / day, max. ' + planOptions[plan.value-1].daily_hospital_days + ' days' 
+        plan: new Intl.NumberFormat().format(planOptions.value[plan.value-1].daily_hospital) + ' / day, max. ' + planOptions.value[plan.value-1].daily_hospital_days + ' days' 
       },
       {
         name: 'Kabuhayan Assistance (Due To Accident)',
-        plan: new Intl.NumberFormat().format(planOptions[plan.value-1].kabuhayan_assistance)
+        plan: new Intl.NumberFormat().format(planOptions.value[plan.value-1].kabuhayan_assistance)
       },
       {
         name: 'Fire Cash Assistance (Residential of Insured)',
-        plan: new Intl.NumberFormat().format(planOptions[plan.value-1].fire_assistance)
+        plan: new Intl.NumberFormat().format(planOptions.value[plan.value-1].fire_assistance)
       },
       {
         name: 'Cash Assistance (Due To COVID-19 Positive)',
-        plan: new Intl.NumberFormat().format(planOptions[plan.value-1].covid_assistance)
+        plan: new Intl.NumberFormat().format(planOptions.value[plan.value-1].covid_assistance)
       },
       {
         name: 'Total Premium Per Person (Inclusive of Taxes)',
-        plan: '₱ ' + new Intl.NumberFormat().format(planOptions[plan.value-1].total)
+        plan: '₱ ' + new Intl.NumberFormat().format(planOptions.value[plan.value-1].total)
       },
     ])
 
@@ -539,40 +575,17 @@ export default {
         console.log(error)
       }) */
 
-    /* load payment channels from Bux.Ph */
-
-    bux_api
-      .get('/channel_codes')
-      .then(res => {
-        console.log('Channel codes loaded.')
-        channelData.value = res.data
-        channelOptions.value = Object.keys(channelData.value).sort()
-      })
-      .catch(error => {
-        //console.log(error.response)
-        $q.dialog({
-          title: 'Alert',
-          html: true,
-          class: 'quattro',
-          message: '<p>An error occurred while trying to access the Payment Channels API. Please try again in a few minutes to check if the situation has been resolved.</p><p style="font-weight:bold;">'+error+'</p>',
-          ok: {
-            color: 'primary',
-            class: 'martel'
-          }
-        })
-      })
-
     let totalToPay = computed(() => {
-      let total = planOptions[plan.value-1].total
+      let total = parseFloat(planOptions.value[plan.value-1].total)
 
       if (addon1.value){
-         total += planOptions[plan.value-1].medical
+         total += parseFloat(planOptions.value[plan.value-1].medical)
       }
       if (addon2.value){
-         total += planOptions[plan.value-1].emergency
+         total += parseFloat(planOptions.value[plan.value-1].emergency)
       }
       if (addon3.value){
-         total += planOptions[plan.value-1].dental
+         total += parseFloat(planOptions.value[plan.value-1].dental)
       }
 
       return total
@@ -625,17 +638,6 @@ export default {
     /* 
      * All function declarations
      */
-
-    function getPlans(){
-      bux_api
-        .get('getplans.php')
-        .then(res => {
-          console.log(res.data)
-        })
-        .catch(error => {
-          console.error(error.response)
-        })
-    }
 
     function checkSession(session,session_done){
       if (session && session_done == ''){
@@ -910,7 +912,7 @@ export default {
             "req_id": $q.localStorage.getItem('uuid'),
             "channel": pay_code.value,
             "amount": totalToPay.value.toString(),
-            "description": "PA-" + planOptions[plan.value-1].name,
+            "description": "PA-" + planOptions.value[plan.value-1].name,
             "expiry": 24,
             "email": $q.localStorage.getItem('emailAddress'),
             "contact": $q.localStorage.getItem('mobilePhone'),
@@ -953,7 +955,7 @@ export default {
             $q.localStorage.set('pay_created',res.data.created)
             $q.localStorage.set('pay_expiry',res.data.expiry)
             $q.localStorage.set('pay_amount',totalToPay.value)
-            $q.localStorage.set('pay_description',"PA-" + planOptions[plan.value-1].name)
+            $q.localStorage.set('pay_description',"PA-" + planOptions.value[plan.value-1].name)
             $q.localStorage.set('pay_instruction',channelData.value[channel.value][outlet.value]['instructions'].Payment)
             
             // Save personal information and selected plans to database

@@ -4,18 +4,18 @@
         <div class="medical">
           <div class="row">
             <div class="col-12 text-grey-9 q-pa-xl">
-              <p class="martel text-h3 text-primary">Congratulations!</p>
+              <p class="martel text-h3 text-white">Congratulations!</p>
               <p class="quattro text-h6 text-grey-10">Your application for <b>Personal Accident Insurance</b> is now under process.  Details of your application and status of payment has been emailed to <span class="text-bold">{{ emailAddress }}</span>. Please take note of your Transaction Reference Number: <b>{{ pay_refcode }}</b></p>
               <p class="quattro text-h6 text-grey-10">Likewise, a PHILSECURE account has been created for you so you can view and manage your insurance policies and payment transactions.  We sent you a second email with a temporary password so you can access your account. <span class="text-bold">We advise that you immediately login and change your temporary password in order to secure your account</span>.</p>
-              <q-btn color="primary" type="a" to="login" label="Login here" class="martel q-mt-sm q-mb-md"/>
+              <q-btn color="amber" type="a" to="login" label="Login here" class="martel text-black q-mt-sm q-mb-lg"/>
               <p class="quattro text-h6 text-grey-10">Thank you very much and congratulations once again for securing your safety!</p>
               
               <p class="q-my-xl gt-sm">&nbsp;</p>
               <p class="q-my-sm lt-md">&nbsp;</p>
               <p class="quattro text-h6 text-grey-10 q-mt-sm">Need assistance? We're here to help.</p>
-              <p class="martel text-h4 text-primary q-my-xs">cs@phil-secure.com</p>
-              <p class="martel text-h4 text-primary q-my-xs">0908.1234.567</p>
-              <p class="martel text-h4 text-primary q-my-xs">facebook.com/philsecure</p>
+              <p class="martel text-h4 text-white q-my-xs">cs@phil-secure.com</p>
+              <p class="martel text-h4 text-white q-my-xs">0908.1234.567</p>
+              <p class="martel text-h4 text-white q-my-xs">facebook.com/philsecure</p>
             </div>
 
             <div class="col">
@@ -149,7 +149,7 @@ export default {
     const pay_amount = parseFloat($q.localStorage.getItem('pay_amount'))
     const pay_description = $q.localStorage.getItem('pay_description')
     const pay_instruction = $q.localStorage.getItem('pay_instruction') === "undefined" ? {} : Object.assign({},$q.localStorage.getItem('pay_instruction'))
-    console.log(pay_instruction)
+    //console.log(pay_instruction)
     return {
       emailAddress,
       pay_checkouturl,
@@ -177,7 +177,7 @@ div.medical {
   background-attachment: scroll;
 }
 div.medical > div {
-  backdrop-filter: blur(5px) sepia(100%);
+  backdrop-filter: blur(10px) sepia(10%) opacity(100%);
 }
 
 body.screen--xs {
