@@ -404,8 +404,8 @@ export default {
     let addonNumber = ref(null)
 
     let plan = ref(1) // default is Plan A 
-    //let planOptions = getPlans()
-    let planOptions = [  // later we load this value from the database
+    let planOptions = getPlans()
+    /* let planOptions = [  // later we load this value from the database
       {
         id: '1', 
         name: 'Plan A',
@@ -442,7 +442,7 @@ export default {
         dental: 165.00,
         total: 321.05
       },
-    ]
+    ] */
 
     const planColumns = [
       {
@@ -627,7 +627,7 @@ export default {
      */
 
     function getPlans(){
-      db_api
+      bux_api
         .get('getplans.php')
         .then(res => {
           console.log(res.data)
