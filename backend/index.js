@@ -65,7 +65,7 @@ app.post('/generate_code', (request, response) => {
 })
 
 // DB query for Plans
-app.get('/get_plans', (request, response) => {
+app.get('/get_plan', (request, response) => {
   //pool.connect();
   console.log('---------')
   console.log('Get Plans')

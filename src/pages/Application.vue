@@ -406,40 +406,34 @@ export default {
     let plan = ref(1) // default is Plan A 
     let planOptions = ref([])
 
-    /* get plans from DB */
-
-    bux_api
-      .get('/get_plans')
+    /* Verify Geolocation */
+    axios.get('https://iplist.cc/api')
       .then(res => {
-        planOptions.value = res.data
-        console.log('Plan Options loaded.')
+        if (res.data.countrycode !== 'PH'){
+          $q.dialog({
+            title: 'Alert',
+            persistent: true,
+            html: true,
+            class: 'text-h6',
+            message: `<p style='text-align: center; line-height: 1.2; color: #505050;'>Our sincere apologies! This product is not yet available in <b>${res.data.countryname}</b>.</p>`,
+            ok: {
+              color: 'primary',
+            }
+          }).onOk(() => {
+            // Clear session and stored data
+            clearSession()
+            // Redirect to home
+            window.open('/','_self')
+          })
+        }else{
+          fetchInitData()
+        }
       })
       .catch(error => {
-        console.error(error)
+        console.log(error)
       })
-
-    /* load payment channels from Bux.Ph */
-
-    bux_api
-      .get('/channel_codes')
-      .then(res => {
-        console.log('Channel Codes loaded.')
-        channelData.value = res.data
-        channelOptions.value = Object.keys(channelData.value).sort()
-      })
-      .catch(error => {
-        //console.log(error.response)
-        $q.dialog({
-          title: 'Alert',
-          html: true,
-          class: 'quattro',
-          message: '<p>An error occurred while trying to access the Payment Channels API. Please try again in a few minutes to check if the situation has been resolved.</p><p style="font-weight:bold;">'+error+'</p>',
-          ok: {
-            color: 'primary',
-            class: 'martel'
-          }
-        })
-      })
+    
+    //fetchInitData()
     
     /* let planOptions = [  // later we load this value from the database
       {
@@ -544,37 +538,6 @@ export default {
     let pay_refcode = ref(null)
     let pay_checkout_url = ref(null)
 
-    // Comment out this line when ready to implement the Geolocation check
-    checkSession(session,session_done)
-
-    /* Verify Geolocation */
-
-    /* axios.get('https://iplist.cc/api')
-      .then(res => {
-        if (res.data.countrycode !== 'PH'){
-          $q.dialog({
-            title: 'Alert',
-            persistent: true,
-            html: true,
-            class: 'text-h6',
-            message: `<p style='text-align: center; line-height: 1.2; color: #505050;'>Our sincere apologies! This product is not yet available in <b>${res.data.countryname}</b>.</p>`,
-            ok: {
-              color: 'primary',
-            }
-          }).onOk(() => {
-            // Clear session and stored data
-            clearSession()
-            // Redirect to home
-            window.open('/','_self')
-          })
-        }else{
-          checkSession(session,session_done)
-        }
-      })
-      .catch(error => {
-        console.log(error)
-      }) */
-
     let totalToPay = computed(() => {
       let total = parseFloat(planOptions.value[plan.value-1].total)
 
@@ -638,6 +601,66 @@ export default {
     /* 
      * All function declarations
      */
+
+    function getPlans(){
+      return new Promise((resolve, reject) => {
+        bux_api.get('/get_plans')
+          .then(res => {
+            planOptions.value = res.data
+            resolve('ok')
+            console.log('Plan Options is ok.')
+          })
+          .catch(error => {
+            resolve(error)
+            //console.error(error)
+          })
+      })
+    }
+
+    function getChannels(){
+      return new Promise((resolve, reject) => {
+        bux_api.get('/channel_codes')
+          .then(res => {
+            channelData.value = res.data              
+            channelOptions.value = Object.keys(channelData.value).sort()
+            resolve('ok')
+            console.log('Channel Codes is ok.')
+          })
+          .catch(error => {
+            resolve(error)
+            //console.error(error)
+          })
+      })
+    }
+
+    async function fetchInitData(){
+      const [getPlansRes, getChannelsRes] = await Promise.all([getPlans(), getChannels()])
+      //console.log(getPlansRes,getChannelsRes)
+      if (getPlansRes == 'ok' && getChannelsRes == 'ok'){
+        console.log('Initial data was successfully fetched.')
+        // remove the loading screen
+
+        // check for old session
+        checkSession(session,session_done)
+      }else{
+        console.error('Error encountered while initializing data.')
+        // remove the loading screen
+
+        // show the error dialog
+        $q.dialog({
+          title: 'Alert',
+          html: true,
+          class: 'quattro',
+          message: '<p>Oh no! We encountered an error while trying to initialize some data. Please try again in a few minutes to check if the situation has been resolved. If the problem persists, you may send us an email at <b>cs@phil-secure.com</b></p>',
+          ok: {
+            color: 'primary',
+            class: 'martel'
+          },
+        }).onOk(() => {
+          window.open('/','_self')
+        })
+      }
+    }
 
     function checkSession(session,session_done){
       if (session && session_done == ''){
@@ -878,6 +901,9 @@ export default {
       pay_checkout_url,
       totalToPay,
 
+      getPlans,
+      getChannels,
+      fetchInitData,
       clearSession,
       cancelApplication,
       saveData,
