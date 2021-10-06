@@ -3,7 +3,7 @@ import axios from 'axios'
 
 // Real API URL is set in the backend
 const bux_api = axios.create({ 
-  baseURL: 'http://localhost:3000' //'https://philsecure-pa-backend.herokuapp.com'
+  baseURL: 'https://philsecure-pa-backend.herokuapp.com'
 })
 
 // more info on params: https://v2.quasar.dev/quasar-cli/boot-files
