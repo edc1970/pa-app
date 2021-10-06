@@ -407,7 +407,7 @@ export default {
     let planOptions = ref([])
 
     /* Verify Geolocation */
-    axios.get('https://iplist.cc/api')
+    /* axios.get('https://iplist.cc/api')
       .then(res => {
         if (res.data.countrycode !== 'PH'){
           $q.dialog({
@@ -431,9 +431,9 @@ export default {
       })
       .catch(error => {
         console.log(error)
-      })
+      }) */
     
-    //fetchInitData()
+    fetchInitData()
     
     /* let planOptions = [  // later we load this value from the database
       {
